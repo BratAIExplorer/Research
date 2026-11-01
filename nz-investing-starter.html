@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiwi Money Starter</title>
+<meta name="description" content="A playful, factual starter guide to investing for someone new to New Zealand. Education only, not advice.">
+<style>
+:root{
+  --bg:#fbf7ef; --card:#ffffff; --ink:#15251d; --muted:#5b6b62; --line:#e6dfcf;
+  --green:#12503a; --lime:#b9e24b; --coral:#ff6b4a; --sky:#d9eefb; --sun:#ffd666; --warn:#fff1c9;
+  --shadow:0 6px 0 rgba(18,80,58,.12);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1a15; --card:#17261f; --ink:#eef4ea; --muted:#a3b5aa; --line:#2a3d33;
+    --green:#8fd9b0; --lime:#b9e24b; --coral:#ff8a6e; --sky:#1b3340; --sun:#e9c156; --warn:#3a3217;
+    --shadow:0 6px 0 rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0 0 .5rem}
+a{color:var(--green);font-weight:600}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+.disclaimer{background:var(--warn);border-bottom:2px solid var(--sun);font-size:14px;padding:8px 0;text-align:center}
+header.hero{padding:44px 0 28px}
+.badge{display:inline-block;background:var(--lime);color:#10251a;font-weight:800;border-radius:99px;padding:4px 12px;font-size:13px;letter-spacing:.03em}
+.hero h1{font-size:clamp(2rem,6vw,3.6rem);margin-top:14px}
+.hero h1 em{color:var(--coral);font-style:normal}
+.hero p{max-width:640px;color:var(--muted);font-size:1.1rem}
+nav.chips{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0}
+nav.chips .wrap{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+nav.chips a{white-space:nowrap;text-decoration:none;font-size:14px;padding:6px 12px;border:2px solid var(--green);border-radius:99px;color:var(--green)}
+nav.chips a:hover{background:var(--green);color:var(--bg)}
+section{padding:36px 0 8px}
+section>.wrap>h2{font-size:clamp(1.6rem,4vw,2.2rem)}
+.lead{color:var(--muted);max-width:700px;margin:0 0 18px}
+.card{background:var(--card);border:2px solid var(--green);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--sky);color:var(--ink)}
+.tag.red{background:#ffd9d1;color:#6b1c0c}.tag.green{background:#d8f2c2;color:#1d4a0b}.tag.amber{background:var(--warn)}
+@media (prefers-color-scheme: dark){.tag.red{background:#5a2418;color:#ffd9d1}.tag.green{background:#254a14;color:#d8f2c2}}
+button,.btn{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--green);background:var(--card);color:var(--green);border-radius:12px;padding:8px 14px}
+button:hover{background:var(--green);color:var(--bg)}
+button.on{background:var(--green);color:var(--bg)}
+button.big{background:var(--coral);border-color:var(--coral);color:#fff}
+.small{font-size:13px;color:var(--muted)}
+.note{border-left:5px solid var(--coral);background:var(--card);padding:10px 14px;border-radius:8px;margin:14px 0;font-size:15px}
+/* steps */
+.bar{height:16px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0 14px}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--green));transition:width .4s}
+.step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:2px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--card)}
+.step input{width:24px;height:24px;margin-top:3px;accent-color:var(--green);flex:none}
+.step.done{opacity:.65}.step.done b{text-decoration:line-through}
+.step b{display:block}
+/* tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.panel{display:none}.panel.show{display:block}
+ul.tight{margin:.4rem 0;padding-left:1.2rem}
+/* sliders */
+label.row{display:block;margin:12px 0}
+label.row span{display:flex;justify-content:space-between;font-weight:600}
+input[type=range]{width:100%;accent-color:var(--green)}
+select,input[type=number]{font:inherit;padding:8px;border-radius:10px;border:2px solid var(--green);background:var(--card);color:var(--ink);width:100%}
+.stat{background:var(--sky);border-radius:14px;padding:12px}
+.stat b{display:block;font-size:1.5rem;font-family:Georgia,serif}
+svg text{fill:var(--muted);font-size:11px}
+/* flip cards */
+.flip{perspective:900px;min-height:150px;cursor:pointer}
+.flip .in{position:relative;min-height:150px;transition:transform .5s;transform-style:preserve-3d}
+.flip.f .in{transform:rotateY(180deg)}
+.flip .a,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border:2px solid var(--green);border-radius:16px;padding:14px;background:var(--card);overflow:auto}
+.flip .a{background:var(--warn)}
+.flip .b{transform:rotateY(180deg)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+th{background:var(--sky)}
+.tblwrap{overflow-x:auto}
+.voice h3{font-size:1.1rem}
+.quiz button{display:block;width:100%;text-align:left;margin:6px 0}
+.quiz .ok{background:#d8f2c2!important;color:#1d4a0b!important;border-color:#6bb33a}
+.quiz .no{background:#ffd9d1!important;color:#6b1c0c!important;border-color:var(--coral)}
+.links a{display:block;text-decoration:none;color:inherit}
+.links .card:hover{transform:translateY(-3px)}
+.links .card{transition:transform .15s;height:100%}
+.links .u{font-size:12px;color:var(--muted);word-break:break-all}
+footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="disclaimer"><b>Education only, not financial advice.</b> Rules checked 1 Nov 2026. Tax rules change. Confirm with IRD or a licensed adviser before acting.</div>
+
+<header class="hero"><div class="wrap">
+  <span class="badge">NEW TO NZ · NEW TO INVESTING</span>
+  <h1>Kiwi Money Starter:<br>small steps, <em>your own homework</em>.</h1>
+  <p>No hype. No "guaranteed returns". Just how investing works, how NZ tax treats it, what famous investors actually say (including the ones who disagree), and where to check everything yourself.</p>
+  <p><button class="big" onclick="document.getElementById('steps').scrollIntoView()">Start with the 7 baby steps ↓</button></p>
+</div></header>
+
+<nav class="chips"><div class="wrap">
+  <a href="#steps">1 Baby steps</a><a href="#vehicles">2 Where money goes</a><a href="#play">3 Playground</a><a href="#dip">4 Dip vs regular</a><a href="#etf">5 US vs Irish vs NZ funds</a><a href="#tax">6 NZ tax decoder</a><a href="#myths">7 Myths</a><a href="#quiz">8 Quiz</a><a href="#links">9 Real links</a>
+</div></nav>
+
+<!-- 1 STEPS -->
+<section id="steps"><div class="wrap">
+  <h2>1 · Seven baby steps</h2>
+  <p class="lead">Tick them off. Your progress is saved on this device only. Nobody sees it.</p>
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="small" id="ptxt"></div>
+  <div id="steplist"></div>
+  <div class="note"><b>Order matters.</b> Paying off a 20% credit card is a guaranteed 20% "return". No fund can promise that. So debt and a safety cushion come before investing.</div>
+</div></section>
+
+<!-- 2 VEHICLES -->
+<section id="vehicles"><div class="wrap">
+  <h2>2 · Where can the money actually go?</h2>
+  <p class="lead">Four common buckets in NZ. Tap one.</p>
+  <div class="tabs" id="vtabs"></div>
+  <div id="vpanels"></div>
+  <div class="note"><b>Challenge to the usual advice:</b> some guides say "skip KiwiSaver for a 5–10 year goal". Not so fast. If your employer contributes, that is free money on day one. Compare that to any fund return, then decide. Check you are eligible first (see IRD link below).</div>
+</div></section>
+
+<!-- 3 PLAYGROUND -->
+<section id="play"><div class="wrap">
+  <h2>3 · Playground: time + fees</h2>
+  <p class="lead">These are <b>made-up growth rates for illustration</b>. Real markets can fall for years. This is a "what if", not a forecast.</p>
+  <div class="grid g2">
+    <div class="card">
+      <label class="row"><span>Start with <output id="o_start"></output></span><input type="range" id="start" min="0" max="50000" step="500" value="1000"></label>
+      <label class="row"><span>Add each month <output id="o_mo"></output></span><input type="range" id="mo" min="0" max="2000" step="25" value="200"></label>
+      <label class="row"><span>For how many years <output id="o_yrs"></output></span><input type="range" id="yrs" min="1" max="30" step="1" value="10"></label>
+      <label class="row"><span>Yearly fee of the fund <output id="o_fee"></output></span><input type="range" id="fee" min="0" max="2.5" step="0.05" value="0.3"></label>
+      <p class="small">Fee tip: 0.2% vs 1.5% a year sounds tiny. Slide it and watch the gap grow.</p>
+    </div>
+    <div class="card">
+      <svg id="chart" viewBox="0 0 400 220" width="100%" role="img" aria-label="Growth chart of three illustrative scenarios"></svg>
+      <div class="grid g3" id="res" style="margin-top:8px"></div>
+      <p class="small">Lines: grey = what you put in. Orange = cautious (3%/yr before fee). Green = middle (6%). Lime = strong (9%). Before tax and inflation.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Bumpy-road toy: invest every month vs wait for a dip</h3>
+  <p class="lead">A tiny computer experiment. It makes up 2,000 random 10-year markets, then compares two people who each get the same pay-cheque money:<br>
+  <b>Regular Rita</b> invests every month. <b>Dip Dan</b> keeps cash (earning 3%) and only buys when the market is 10% below its high.</p>
+  <div class="grid g2">
+    <div class="card">
+      <button class="big" id="runsim">🎲 Roll 2,000 random markets</button>
+      <div id="simres" style="margin-top:12px" class="small">Press the button.</div>
+    </div>
+    <div class="card">
+      <svg id="path" viewBox="0 0 400 200" width="100%" role="img" aria-label="One random market path with dip-buy points"></svg>
+      <button id="reroll">Show another random market</button>
+    </div>
+  </div>
+  <div class="note"><b>Honest caveat:</b> in a toy model the answer is set by my assumptions (markets drift up ~7% a year, with big swings). So don't treat this as proof. The real-world evidence is in section 4. The toy's useful part is seeing how <i>often</i> waiting works and how <i>badly</i> it can go when no dip comes.</div>
+</div></section>
+
+<!-- 4 DIP -->
+<section id="dip"><div class="wrap">
+  <h2>4 · "Buy the dip" or "buy regularly"? Both sides.</h2>
+  <p class="lead">Tap each card. I'm giving you all three views, then the receipts.</p>
+  <div class="grid g3">
+    <div class="flip" onclick="this.classList.toggle('f')"><div class="in">
+      <div class="a"><span class="tag green">TEAM REGULAR</span><h3>Invest on a schedule</h3><p>Tap to see the evidence ↻</p></div>
+      <div class="b"><ul class="tight"><li>Removes guessing and nerves.</li><li>If you invest from your pay, you are <i>already</i> doing this.</li><li><b>Weakness:</b> if you have a big lump sum, spreading it out usually costs a bit (see Vanguard below).</li></ul></div>
+    </div></div>
+    <div class="flip" onclick="this.classList.toggle('f')"><div class="in">
+      <div class="a"><span class="tag red">TEAM DIP</span><h3>Wait for a drop</h3><p>Tap to see the evidence ↻</p></div>
+      <div class="b"><ul class="tight"><li>Buying cheaper feels smart, and some value investors do it on purpose.</li><li><b>Weakness:</b> you must (1) spot the drop, (2) actually buy while headlines scream, (3) not wait forever. Markets can rise for years without a 10% dip.</li></ul></div>
+    </div></div>
+    <div class="flip" onclick="this.classList.toggle('f')"><div class="in">
+      <div class="a"><span class="tag amber">TEAM MIX</span><h3>Regular + a little extra on drops</h3><p>Tap ↻</p></div>
+      <div class="b"><ul class="tight"><li>Keep the automatic plan running. Optionally keep a small pot to top up in a big fall.</li><li><b>Rule:</b> write the rule down <i>before</i> the fall. Otherwise fear writes it for you.</li><li>This is a common practical approach, not a proven winner.</li></ul></div>
+    </div></div>
+  </div>
+
+  <h3 style="margin-top:24px">The receipts (go read them)</h3>
+  <ul class="tight">
+    <li><b>Vanguard</b> studied lump sum vs spreading it out (DCA) across US, UK and Australian markets. Lump sum came out ahead roughly two-thirds of the time over the following year. DCA still beat sitting in cash most of the time. Sources differ on exact numbers (66–68%). Search "Vanguard cost averaging invest now or temporarily hold your cash" to read it yourself. <span class="small">I checked: the finding is real; I did not confirm the exact % on Vanguard's own page.</span></li>
+    <li><b>Charles Schwab</b> compared 5 pretend investors: one with <i>perfect</i> timing every year vs one who just invested on day one. Perfect timing won, but only modestly. Read: <a href="https://www.schwab.com/learn/story/does-market-timing-work" target="_blank" rel="noopener">Does Market Timing Work?</a></li>
+    <li><b>Counterpoint:</b> investors like Robert Shiller show that high starting prices tend to mean lower returns over the next 10–20 years. So "price matters" is a real argument. It just doesn't tell you the <i>month</i> to buy.</li>
+  </ul>
+
+  <h3 style="margin-top:24px">What global investors say</h3>
+  <p class="small">My short paraphrases. Not quotes. Read the originals.</p>
+  <div class="grid g2" id="voices"></div>
+</div></section>
+
+<!-- 5 ETF -->
+<section id="etf"><div class="wrap">
+  <h2>5 · US-listed vs Irish (UCITS) vs NZ funds</h2>
+  <p class="lead">Same shares inside, different "wrapper". The wrapper changes your paperwork and one nasty risk.</p>
+  <div class="tabs" id="etabs"></div>
+  <div class="tblwrap"><table id="etable"></table></div>
+  <div class="note"><b>Correcting a common claim:</b> you'll read that Irish funds "cut US dividend tax to 15%". True, but a US-listed ETF also gets 15% for a NZ resident if you file a <b>W-8BEN</b> form (otherwise 30%). So the withholding is about the same. The real differences are <b>US estate tax</b> and <b>what's available on your NZ platform</b>.</div>
+  <div class="card"><b>US estate tax in one line:</b> if a non-US person owns more than about <b>US$60,000</b> of US-situs assets (this includes US-listed ETFs) when they die, the US can tax the excess at up to 40%. <span class="small">I checked: the US$60k figure appears across multiple sources. I did NOT confirm whether a NZ–US estate treaty changes this. Assume it applies and ask a tax specialist if you're heading past US$60k.</span></div>
+</div></section>
+
+<!-- 6 TAX -->
+<section id="tax"><div class="wrap">
+  <h2>6 · NZ tax decoder</h2>
+  <p class="lead">Three questions. Gives you a pointer, not a tax return.</p>
+  <div class="grid g2">
+    <div class="card">
+      <label class="row"><span>Q1. First time living in NZ (or back after 10+ years away) and arrived under 4 years ago?</span>
+        <select id="q1"><option value="?">Not sure</option><option value="y">Yes</option><option value="n">No</option></select></label>
+      <label class="row"><span>Q2. Total <b>cost</b> (money you put in) of offshore shares/ETFs you hold directly, in NZD</span>
+        <input type="number" id="q2" value="10000" min="0" step="500"></label>
+      <label class="row"><span>Q3. Your top tax rate</span>
+        <select id="q3"><option value="10.5">10.5% (income to $15,600)</option><option value="17.5">17.5% (to $53,500)</option><option value="30" selected>30% (to $78,100)</option><option value="33">33% (to $180,000)</option><option value="39">39% (over $180,000)</option></select></label>
+      <label class="row"><span>Current <b>market value</b> of those holdings, NZD</span>
+        <input type="number" id="q4" value="10000" min="0" step="500"></label>
+    </div>
+    <div class="card" id="taxout" aria-live="polite"></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h3>The NZ cheat-sheet</h3><ul class="tight">
+      <li><b>No general capital gains tax.</b> But gains can be taxed if you bought shares <i>intending to sell them for profit</i>. It's about intent, not just how often you trade.</li>
+      <li><b>Offshore stuff over NZ$50k cost</b> falls under the FIF rules. Default method (FDR): you're taxed on 5% of the start-of-year value, even if the fund paid nothing.</li>
+      <li><b>PIE funds</b> (Kernel, Simplicity, etc.) pay tax for you at your PIR: 10.5%, 17.5% or 28%. Max is 28%.</li>
+      <li><b>Transitional residents:</b> new arrivals may be exempt from tax on most foreign income, including FIF, for about 4 years. Huge if it fits you. Ask IRD.</li>
+    </ul></div>
+    <div class="card"><h3>Things I could not confirm</h3><ul class="tight">
+      <li class="small">A Chartered Accountants ANZ item dated 19 Oct 2026 says the FIF $50k threshold may <b>rise to $100k</b>. It's a proposal. I couldn't open the page, so I don't know if it became law. <b>Check IRD.</b></li>
+      <li class="small">PIR income thresholds: sources disagree (older: $14k/$48k/$70k; newer: $15.6k/$53.5k/$78.1k). Use IRD's "find my PIR" tool.</li>
+      <li class="small">The FIF $50k test counts <b>cost</b>, not value. Whether a given holding is covered by the exemption can vary. Check the ticker.</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- 7 MYTHS -->
+<section id="myths"><div class="wrap">
+  <h2>7 · Myth or fact?</h2>
+  <p class="lead">Tap to flip.</p>
+  <div class="grid g3" id="mythgrid"></div>
+</div></section>
+
+<!-- 8 QUIZ -->
+<section id="quiz"><div class="wrap">
+  <h2>8 · Quick quiz</h2>
+  <div class="grid g2 quiz" id="quizbox"></div>
+  <p id="score" class="small"></p>
+</div></section>
+
+<!-- 9 LINKS -->
+<section id="links"><div class="wrap">
+  <h2>9 · Real places to check everything</h2>
+  <p class="lead">Official or independent. Not sales pages. Open them, read for 10 minutes, then decide.</p>
+  <div class="grid g3 links" id="linkgrid"></div>
+  <h3 style="margin-top:24px">Before you hand money to anyone, ask 4 things</h3>
+  <ol class="tight">
+    <li>Are they on the FMA register of licensed providers?</li>
+    <li>What are <b>all</b> the fees, in dollars per year on my amount?</li>
+    <li>Where is the Product Disclosure Statement, and what's the worst year it shows?</li>
+    <li>Why would they recommend it? Do they get paid if I say yes?</li>
+  </ol>
+  <div class="note"><b>Red flags:</b> "guaranteed" or "target" returns of 15–20%, a countdown timer, "limited slots", pressure to decide today. A real investment shows you the downside first. If someone pitches you a private "opportunity", including a friend's, treat it like a stranger's until you've checked their licence.</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p><b>Made for a friend, with love.</b> This page is general education. It does not know your income, visa, debts or goals, so it can't say what is right for you. If you want personal advice, use a licensed Financial Advice Provider (check the FMA register).</p>
+  <p>Last fact-check: 1 Nov 2026. Items marked "I did not confirm" are open questions.</p>
+</div></footer>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var nz=function(n){return "$"+Math.round(n).toLocaleString("en-NZ")};
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+
+/* ---- STEPS ---- */
+var STEPS=[
+ ["Work out your tax status","Are you a 'transitional resident'? Is your KiwiSaver eligible? Read the two IRD pages in section 9.","Free, 30 min"],
+ ["Build a cash cushion","Many NZ guides suggest ~3 months of costs in an easy-access account. Check Sorted for their current rule of thumb. This money is NOT for investing.","Safety first"],
+ ["Kill expensive debt","Credit card and buy-now-pay-later debt cost more than most investments earn.","Guaranteed 'return'"],
+ ["Check KiwiSaver and the employer match","If you qualify, find out what your employer adds. Pick a fund type that suits your timeline.","Free money"],
+ ["Pick ONE boring, broad, low-fee fund","Read its Product Disclosure Statement. Write down the yearly fee and the worst past year.","Keep it simple"],
+ ["Automate a tiny amount","Even $20–$50 a week. The point is the habit. Raise it later.","Baby step"],
+ ["Write a 5-line plan","Why am I investing? For how long? What will I do if it falls 20%? When do I review (once a year)? What would make me sell?","Your framework"]
+];
+var done={};
+try{done=JSON.parse(store("kms_steps")||"{}")||{}}catch(e){done={}}
+function renderSteps(){
+  var box=$("steplist");box.innerHTML="";var n=0;
+  STEPS.forEach(function(s,i){
+    var d=!!done[i];if(d)n++;
+    var el=document.createElement("label");el.className="step"+(d?" done":"");
+    el.innerHTML='<input type="checkbox" '+(d?"checked":"")+'><div><b>'+(i+1)+'. '+s[0]+'</b><span class="small">'+s[1]+'</span> <span class="tag">'+s[2]+'</span></div>';
+    el.querySelector("input").addEventListener("change",function(e){done[i]=e.target.checked;store("kms_steps",JSON.stringify(done));renderSteps()});
+    box.appendChild(el);
+  });
+  $("pbar").style.width=(n/STEPS.length*100)+"%";
+  $("ptxt").textContent=n===STEPS.length?"🎉 All 7 done. Now go read one primary source from section 9.":n+" of 7 done. "+(n===0?"Step 1 takes 30 minutes.":"Nice. Keep going.");
+}
+renderSteps();
+
+/* ---- VEHICLES ---- */
+var VEH=[
+ {n:"KiwiSaver",who:"Anyone eligible who works in NZ",pros:["Employer contributions (check yours)","Government contribution is now smaller: 25c per $1, max $260.72 a year (since 1 Jul 2025), nothing above $180k income","Many fund choices, from cautious to growth"],cons:["Locked until 65, with exceptions such as first home, serious hardship, serious illness","Default contribution rises: 3.5% from Apr 2026, 4% from Apr 2028"],ask:"What's my employer's contribution, and what fund type am I actually in?"},
+ {n:"NZ PIE funds",who:"People who want it done for them",pros:["Provider handles tax and FIF paperwork","Tax capped at 28% (PIR 10.5/17.5/28)","Often one multi-asset fund = instant diversification","No US estate tax issue"],cons:["Fees vary a lot. Compare them","Wrong PIR means wrong tax. Set it right","Fund's tax cost is built into returns"],ask:"What's the total yearly fee and what's my PIR?"},
+ {n:"DIY platforms",who:"People who want control and are happy to learn",pros:["Start small, buy fractions, automate buys","Wide choice of ETFs and shares","Examples in NZ: Sharesies, Hatch, Interactive Brokers"],cons:["You handle FIF and dividend tax (some platforms help with reports)","Easy to over-trade or pick hot stocks","Mostly US-listed ETFs on the simple platforms. Irish funds need a broker like IBKR (check what's offered)"],ask:"Which exact funds can I buy, in which currency, and what are the FX and trading fees?"},
+ {n:"Term deposits / savings",who:"Money you need within ~3 years, and your cushion",pros:["Known return, no market ups and downs","NZ has a Depositor Compensation Scheme (check the current cap on the Reserve Bank site) and banks show credit ratings"],cons:["Interest is taxed at your full rate","Can lose to inflation over many years"],ask:"After tax and inflation, what do I really earn?"}
+];
+function renderVeh(i){
+  var v=VEH[i];
+  [].forEach.call($("vtabs").children,function(b,j){b.classList.toggle("on",j===i)});
+  $("vpanels").innerHTML='<div class="card"><h3>'+v.n+'</h3><p class="small">Good for: '+v.who+'</p><div class="grid g2"><div><b>👍</b><ul class="tight">'+v.pros.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ul></div><div><b>👎</b><ul class="tight">'+v.cons.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ul></div></div><div class="note"><b>Ask:</b> '+v.ask+'</div></div>';
+}
+VEH.forEach(function(v,i){var b=document.createElement("button");b.textContent=v.n;b.onclick=function(){renderVeh(i)};$("vtabs").appendChild(b)});
+renderVeh(0);
+
+/* ---- CALCULATOR ---- */
+function fv(start,mo,yrs,rate){
+  var m=rate/12,bal=start,out=[bal];
+  for(var y=1;y<=yrs;y++){for(var k=0;k<12;k++){bal=bal*(1+m)+mo}out.push(bal)}
+  return out;
+}
+function calc(){
+  var s=+$("start").value,m=+$("mo").value,y=+$("yrs").value,f=+$("fee").value/100;
+  $("o_start").textContent=nz(s);$("o_mo").textContent=nz(m);$("o_yrs").textContent=y+(y===1?" year":" years");$("o_fee").textContent=(f*100).toFixed(2)+"%";
+  var rates=[.03,.06,.09],cols=["#ff6b4a","#12503a","#9ac52a"],names=["Cautious","Middle","Strong"];
+  var sets=rates.map(function(r){return fv(s,m,y,r-f)});
+  var put=[];for(var i=0;i<=y;i++)put.push(s+m*12*i);
+  var max=Math.max.apply(null,sets[2].concat(put));
+  var W=400,H=220,pl=44,pb=22,pt=10,pr=8;
+  function X(i){return pl+(W-pl-pr)*i/Math.max(y,1)}
+  function Y(v){return H-pb-(H-pb-pt)*v/max}
+  function line(arr,c,w,dash){return '<polyline fill="none" stroke="'+c+'" stroke-width="'+w+'" '+(dash?'stroke-dasharray="4 3"':'')+' points="'+arr.map(function(v,i){return X(i)+","+Y(v)}).join(" ")+'"/>'}
+  var svg='<line x1="'+pl+'" y1="'+(H-pb)+'" x2="'+(W-pr)+'" y2="'+(H-pb)+'" stroke="#999"/><line x1="'+pl+'" y1="'+pt+'" x2="'+pl+'" y2="'+(H-pb)+'" stroke="#999"/>';
+  svg+='<text x="2" y="'+(pt+8)+'">'+nz(max)+'</text><text x="2" y="'+(H-pb)+'">$0</text><text x="'+pl+'" y="'+(H-6)+'">now</text><text x="'+(W-pr-40)+'" y="'+(H-6)+'">'+y+' yrs</text>';
+  svg+=line(put,"#888",2,true);
+  sets.forEach(function(a,i){svg+=line(a,cols[i],3)});
+  $("chart").innerHTML=svg;
+  $("res").innerHTML=sets.map(function(a,i){return '<div class="stat"><span class="small">'+names[i]+'</span><b>'+nz(a[y])+'</b><span class="small">gain '+nz(a[y]-put[y])+'</span></div>'}).join("");
+}
+["start","mo","yrs","fee"].forEach(function(id){$(id).addEventListener("input",calc)});calc();
+
+/* ---- TOY SIM ---- */
+function randn(){var u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+var MU=0.0055,SIG=0.042,CASH=Math.pow(1.03,1/12)-1,MONTHS=120,DEP=500;
+function path(){var p=[1],x=1;for(var i=0;i<MONTHS;i++){x*=Math.exp(MU+SIG*randn());p.push(x)}return p}
+function run(p,track){
+  var uA=0,cash=0,uB=0,peak=p[0],buys=[];
+  for(var i=1;i<=MONTHS;i++){
+    var px=p[i];if(px>peak)peak=px;
+    uA+=DEP/px;                       /* Rita buys now */
+    cash=cash*(1+CASH)+DEP;            /* Dan holds cash */
+    if(px<=0.9*peak&&cash>0){uB+=cash/px;cash=0;if(track)buys.push(i)}
+  }
+  var last=p[MONTHS];
+  return {A:uA*last,B:uB*last+cash,buys:buys};
+}
+function med(a){a=a.slice().sort(function(x,y){return x-y});return a[Math.floor(a.length/2)]}
+function pct(a,q){a=a.slice().sort(function(x,y){return x-y});return a[Math.floor(a.length*q)]}
+$("runsim").onclick=function(){
+  var A=[],B=[],win=0,N=2000;
+  for(var i=0;i<N;i++){var r=run(path());A.push(r.A);B.push(r.B);if(r.A>r.B)win++}
+  var inP=DEP*MONTHS;
+  $("simres").innerHTML='Each person invests '+nz(DEP)+' a month for 10 years ('+nz(inP)+' total).<br><br>'+
+   '<b>Regular Rita</b> ended with: median '+nz(med(A))+' · unlucky 1-in-10: '+nz(pct(A,.1))+'<br>'+
+   '<b>Dip Dan</b> ended with: median '+nz(med(B))+' · unlucky 1-in-10: '+nz(pct(B,.1))+'<br><br>'+
+   '<b>Rita beat Dan in '+Math.round(win/N*100)+'% of the '+N.toLocaleString()+' markets.</b><br>'+
+   '<span class="small">Both can lose money in a bad market. The toy only shows that waiting does not reliably win. It does not prove either side.</span>';
+};
+function drawPath(){
+  var p=path(),r=run(p,true),W=400,H=200,pl=8,pb=14,pt=8,mx=Math.max.apply(null,p),mn=Math.min.apply(null,p);
+  function X(i){return pl+(W-2*pl)*i/MONTHS}
+  function Y(v){return H-pb-(H-pb-pt)*(v-mn)/(mx-mn)}
+  var s='<polyline fill="none" stroke="#12503a" stroke-width="2.5" points="'+p.map(function(v,i){return X(i)+","+Y(v)}).join(" ")+'"/>';
+  r.buys.forEach(function(i){s+='<circle cx="'+X(i)+'" cy="'+Y(p[i])+'" r="5" fill="#ff6b4a"/>'});
+  s+='<text x="8" y="'+(H-2)+'">10 years →  orange dots = Dip Dan bought</text>';
+  $("path").innerHTML=s;
+}
+$("reroll").onclick=drawPath;drawPath();
+
+/* ---- VOICES ---- */
+var VOICES=[
+ ["Warren Buffett","Berkshire Hathaway","For his wife's inheritance he told the trustee: put 90% in a very low-cost S&P 500 index fund and 10% in short-term government bonds. He admits ordinary investors can't beat the market with ease.","Team Regular","https://www.berkshirehathaway.com/letters/2013ltr.pdf","2013 shareholder letter"],
+ ["Jack Bogle","Founder of Vanguard","Costs are the one thing you can control. Own the whole market cheaply instead of hunting for the winning fund.","Team Regular","https://www.bogleheads.org/wiki/Main_Page","Bogleheads wiki"],
+ ["Benjamin Graham","Teacher of Buffett","Picture 'Mr Market', a moody partner who offers you wild prices daily. You may use his mood, but you don't have to follow it.","Team Dip (value view)","","Book: The Intelligent Investor"],
+ ["Howard Marks","Oaktree Capital","Nobody predicts the future, but you can notice where we are in the cycle and prepare. Free memos online.","Team Mix","https://www.oaktreecapital.com/insights/memos","Oaktree memos"],
+ ["Robert Shiller","Nobel economist","Starting valuations matter. Very high prices have tended to be followed by weaker returns over 10–20 years. It's a caution, not a timing tool.","Counter-view","","Book: Irrational Exuberance"],
+ ["Burton Malkiel","Princeton economist","Most people, including professionals, can't reliably outguess prices. Broad index funds are a sensible default.","Team Regular","","Book: A Random Walk Down Wall Street"]
+];
+$("voices").innerHTML=VOICES.map(function(v){return '<div class="card voice"><span class="tag">'+v[3]+'</span><h3>'+v[0]+'</h3><div class="small">'+v[1]+'</div><p>'+v[2]+'</p>'+(v[4]?'<a href="'+v[4]+'" target="_blank" rel="noopener">'+v[5]+' ↗</a>':'<span class="small">'+v[5]+' (try the library)</span>')+'</div>'}).join("");
+
+/* ---- ETF TABLE ---- */
+var ETF=[
+ {n:"US-listed (e.g. VOO)",rows:[["Fund home","USA"],["US dividend tax for you","15% with W-8BEN filed, else 30%"],["US estate tax risk","Yes, above ~US$60k of US assets"],["NZ tax if cost ≤ NZ$50k","Dividends taxed at your rate; foreign tax credit may apply"],["NZ tax if cost > NZ$50k","FIF: ~5% of opening value taxed at your rate"],["Where to buy","Most NZ DIY platforms"]]},
+ {n:"Irish UCITS (e.g. CSPX, VUSA)",rows:[["Fund home","Ireland"],["US dividend tax for you","~15% taken inside the fund"],["US estate tax risk","Not US-situs, so generally avoided"],["NZ tax if cost ≤ NZ$50k","Dividends taxed at your rate (accumulating funds pay none out; ask an accountant how IRD sees this)"],["NZ tax if cost > NZ$50k","FIF, same as left"],["Where to buy","Broker with LSE/Euronext access (e.g. IBKR). Check availability for NZ retail"]]},
+ {n:"NZ PIE fund",rows:[["Fund home","New Zealand"],["US dividend tax for you","Handled inside the fund"],["US estate tax risk","None, you hold a NZ fund"],["NZ tax","Fund pays at your PIR (10.5/17.5/28%). Offshore holdings taxed via FDR inside"],["Your paperwork","Mostly none: set the right PIR"],["Where to buy","Direct from provider or platforms (Kernel, Simplicity, InvestNow etc.)"]]}
+];
+function renderEtf(i){
+  [].forEach.call($("etabs").children,function(b,j){b.classList.toggle("on",j===i)});
+  $("etable").innerHTML='<tr><th style="width:36%">Question</th><th>'+ETF[i].n+'</th></tr>'+ETF[i].rows.map(function(r){return"<tr><td>"+r[0]+"</td><td>"+r[1]+"</td></tr>"}).join("");
+}
+ETF.forEach(function(e,i){var b=document.createElement("button");b.textContent=e.n;b.onclick=function(){renderEtf(i)};$("etabs").appendChild(b)});renderEtf(0);
+
+/* ---- TAX DECODER ---- */
+function tax(){
+  var q1=$("q1").value,cost=+$("q2").value||0,rate=+$("q3").value/100,val=+$("q4").value||0,h="";
+  if(q1==="y"){h+='<span class="tag green">Maybe the best news</span><p>You may be a <b>transitional resident</b>: roughly 4 years of exemption on most foreign income, with FIF not applying. Confirm with IRD. It\'s once-only and has conditions. <b>Plan for when it ends.</b></p>'}
+  else if(q1==="?"){h+='<span class="tag amber">Find out first</span><p>Q1 matters a lot. Search IRD for "transitional resident". It could change your whole plan.</p>'}
+  if(cost>50000){var t=val*0.05*rate;h+='<span class="tag red">Over NZ$50k cost → FIF applies</span><p>Default method: 5% × '+nz(val)+' = '+nz(val*0.05)+' of deemed income. At '+(rate*100)+'% that\'s about <b>'+nz(t)+'</b> tax a year ('+(t/Math.max(val,1)*100).toFixed(2)+'% of the portfolio), even if prices fell. In a PIE at 28% it would be about '+nz(val*0.05*0.28)+'. You may be able to use the lower-of-FDR-or-actual-gain rule in some years. Ask an accountant.</p>'}
+  else{h+='<span class="tag green">Under NZ$50k cost → usually the simple rules</span><p>You\'re generally taxed on dividends received, not 5% deemed income. Watch the total cost: you get close at '+nz(50000-cost)+' more. Keep a spreadsheet of what you put in. <span class="small">(A proposed rise to $100k was reported in Oct 2026. Unconfirmed.)</span></p>'}
+  $("taxout").innerHTML=h;
+}
+["q1","q2","q3","q4"].forEach(function(id){$(id).addEventListener("input",tax)});tax();
+
+/* ---- MYTHS ---- */
+var MYTHS=[
+ ["\"NZ has no capital gains tax, so my share profits are tax-free.\"","Mostly, but not always. Gains are taxable if you bought with the intention of selling for profit, and FIF rules tax offshore holdings on deemed income anyway."],
+ ["\"I need thousands to start.\"","No. Many NZ platforms let you start from a few dollars and buy fractions. A habit beats a big first deposit."],
+ ["\"Irish funds avoid US dividend tax.\"","No. They get about 15% taken inside the fund. A US ETF with a W-8BEN is also about 15%. The real gap is estate tax."],
+ ["\"A smart fund manager will beat the market.\"","Most don't, after fees. The S&P SPIVA reports track this. Look it up and read the latest yourself."],
+ ["\"Index funds are risk-free.\"","They can fall 30–50% in a crash and take years to recover. Only invest money you won't need soon."],
+ ["\"I should wait for the perfect moment.\"","Schwab's study found even perfect timing only beat investing on day one by a modest margin. Waiting often costs more than it saves."]
+];
+$("mythgrid").innerHTML=MYTHS.map(function(m){return '<div class="flip" onclick="this.classList.toggle(\'f\')"><div class="in"><div class="a"><span class="tag red">MYTH?</span><p><b>'+m[0]+'</b></p></div><div class="b"><span class="tag green">REALITY</span><p>'+m[1]+'</p></div></div></div>'}).join("");
+
+/* ---- QUIZ ---- */
+var Q=[
+ ["Which comes BEFORE investing?",["Paying off a 20% credit card","Buying a hot stock","Waiting for a crash"],0],
+ ["The NZ FIF $50k test is measured on…",["Market value","Cost (money you put in)","Your salary"],1],
+ ["Max tax rate inside a NZ PIE fund?",["10.5%","28%","39%"],1],
+ ["Biggest real difference: US ETF vs Irish UCITS for a NZer?",["Dividend tax","US estate tax exposure","Nothing at all"],1],
+ ["If someone promises 'target returns of 15–20%'…",["Great, sign up","Treat as a red flag and check the FMA register","Tell all your friends"],1]
+];
+var got=0,answered=0;
+$("quizbox").innerHTML=Q.map(function(q,qi){return '<div class="card" data-q="'+qi+'"><b>'+(qi+1)+'. '+q[0]+'</b>'+q[1].map(function(o,oi){return '<button data-o="'+oi+'">'+o+'</button>'}).join("")+'</div>'}).join("");
+$("quizbox").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;var card=b.parentNode;if(card.dataset.done)return;
+  var qi=+card.dataset.q,oi=+b.dataset.o;card.dataset.done=1;answered++;
+  if(oi===Q[qi][2]){b.classList.add("ok");got++}else{b.classList.add("no");card.querySelector('[data-o="'+Q[qi][2]+'"]').classList.add("ok")}
+  $("score").textContent=got+" / "+answered+" right"+(answered===Q.length?(got===Q.length?" 🏆 Nailed it.":" · Flip back to the sections you missed."):"");
+});
+
+/* ---- LINKS ---- */
+var LINKS=[
+ ["Sorted (Retirement Commissioner)","Free, independent NZ money guides and calculators","https://sorted.org.nz"],
+ ["Smart Investor (Sorted)","Compare KiwiSaver and managed funds, fees and disclosures","https://smartinvestor.sorted.org.nz"],
+ ["Financial Markets Authority (FMA)","Check who's licensed. Scam warnings. Investor guides","https://www.fma.govt.nz"],
+ ["IRD: Foreign Investment Funds","Official FIF rules and the $50k exemption","https://www.ird.govt.nz/income-tax/income-tax-for-businesses-and-organisations/types-of-business-income/foreign-investment-funds-fifs/foreign-investment-fund-rules-exemptions"],
+ ["IRD: Find my PIR","Get the right PIE tax rate","https://www.ird.govt.nz/roles/portfolio-investment-entities/find-my-prescribed-investor-rate"],
+ ["IRD: KiwiSaver changes","Government contribution and rate changes","https://www.ird.govt.nz/kiwisaver-changes"],
+ ["IRD: Temporary exemption for transitional residents","Technical write-up on the 4-year exemption for new arrivals","https://www.taxtechnical.ird.govt.nz/new-legislation/act-articles/taxation-savings-investment-and-miscellaneous-provisions-act-2006-and-taxation-annual-rates-of-incom/temporary-exemption-for-transitional-residents"],
+ ["Schwab: Does Market Timing Work?","The 'perfect timing' study","https://www.schwab.com/learn/story/does-market-timing-work"],
+ ["S&P SPIVA scorecards","Do active funds beat the index? The data, free","https://www.spglobal.com/spdji/en/research-insights/spiva/"],
+ ["Buffett 2013 letter","His 90/10 advice for his wife's money","https://www.berkshirehathaway.com/letters/2013ltr.pdf"],
+ ["Bogleheads wiki","Community of low-cost index investors","https://www.bogleheads.org/wiki/Main_Page"],
+ ["Oaktree memos (Howard Marks)","The cycle-aware view","https://www.oaktreecapital.com/insights/memos"]
+];
+$("linkgrid").innerHTML=LINKS.map(function(l){return '<a href="'+l[2]+'" target="_blank" rel="noopener"><div class="card"><b>'+l[0]+' ↗</b><p class="small" style="margin:.3rem 0">'+l[1]+'</p><div class="u">'+l[2].replace(/^https?:\/\//,"").slice(0,60)+'…</div></div></a>'}).join("");
+})();
+</script>
+</body>
+</html>
