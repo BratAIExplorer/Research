@@ -103,7 +103,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
 </div></header>
 
 <nav class="chips"><div class="wrap">
-  <a href="#steps">1 Baby steps</a><a href="#vehicles">2 Where money goes</a><a href="#play">3 Playground</a><a href="#dip">4 Dip vs regular</a><a href="#etf">5 US vs Irish vs NZ funds</a><a href="#tax">6 NZ tax decoder</a><a href="#myths">7 Myths</a><a href="#quiz">8 Quiz</a><a href="#links">9 Real links</a>
+  <a href="#steps">1 Baby steps</a><a href="#vehicles">2 Where money goes</a><a href="#play">3 Playground</a><a href="#dip">4 Dip vs regular</a><a href="#etf">5 US vs Irish vs NZ funds</a><a href="#keep">5b 3-5 funds + review</a><a href="#tax">6 NZ tax decoder</a><a href="#myths">7 Myths</a><a href="#quiz">8 Quiz</a><a href="#links">9 Real links</a>
 </div></nav>
 
 <!-- 1 STEPS -->
@@ -198,15 +198,17 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   <div class="tabs" id="etabs"></div>
   <div class="tblwrap"><table id="etable"></table></div>
   <div class="note"><b>Correcting a common claim:</b> you'll read that Irish funds "cut US dividend tax to 15%". True, but a US-listed ETF also gets 15% for a NZ resident if you file a <b>W-8BEN</b> form (otherwise 30%). So the withholding is about the same. The real differences are <b>US estate tax</b> and <b>what's available on your NZ platform</b>.</div>
-  <h3 style="margin-top:26px">The real list: 23 ETFs, not just tech</h3>
+  <h3 style="margin-top:26px">The real list: 35 ETFs, not just tech</h3>
   <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It covers global and US stocks, health care, everyday goods, smaller companies, property, gold, silver, emerging markets and bonds, in US and Irish versions. Broad index funds already hold a lot of big tech, so check each fund's top holdings.</p>
   <div class="grid g3">
     <label class="row"><span>Amount in each fund (NZD) <output id="o_lamt"></output></span><input type="range" id="lamt" min="1000" max="100000" step="1000" value="10000"></label>
     <label class="row"><span>Your top tax rate</span>
       <select id="lrate"><option value="10.5">10.5%</option><option value="17.5">17.5%</option><option value="30" selected>30%</option><option value="33">33%</option><option value="39">39%</option></select></label>
+    <label class="row"><span>Search (try: gold, japan, copper)</span><input type="text" id="lsearch" placeholder="type here" style="font:inherit;padding:8px;border-radius:10px;border:2px solid var(--green);width:100%;background:var(--card);color:var(--ink)"></label>
     <div><span class="small">Show</span><div class="tabs" id="lfilter" style="margin-top:6px"></div></div>
   </div>
   <div class="tblwrap"><table id="ltable"></table></div>
+  <div class="note" id="picksum" aria-live="polite">Tick funds in the first column to build a shortlist (3 to 5 max).</div>
   <div class="note"><b>Read this before trusting any number above:</b>
     <ul class="tight">
       <li><b>Price only, not total return (my assumption).</b> Distributing funds (US ones, plus AGGG) pay cash out, so their price change leaves out income. Accumulating Irish funds reinvest inside, so their price includes it. That makes Irish funds look better than they are, and bonds look worse. Compare yield and price together.</li>
@@ -214,6 +216,11 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
       <li><b>Start date shapes the story.</b> VT is +79% over 3 years but only +71% over 5. The 5-year window started near a market high. Never judge a fund on one window.</li>
       <li><b>Gold and silver</b> pay no income and just track the metal. They were the top performers here (silver +159% over 3 years, gold +121%). That is exactly when people rush in. Silver swings far more than gold. Treat them as a small spice, not the meal. Whether a gold/silver fund counts as a FIF is a question for an accountant.</li>
       <li><b>ETC, not UCITS:</b> the Irish-side gold and silver products are "ETCs", a different wrapper from a UCITS fund. Check who issues it and where.</li>
+      <li><b>Copper:</b> CPER tracks copper <i>futures</i> (my understanding; confirm), not metal in a vault. ICOP holds copper <i>mining companies</i>, a different bet, and is a young fund with no 5-year record. The Irish copper ETC had no return data in my source.</li>
+      <li><b>Platinum</b> is rarer than gold and tied to car and factory demand. It has lagged gold and silver here.</li>
+      <li><b>Energy</b> (XLE, IUES) is up about 180% over 5 years, but that window started at an oil slump. It swings with oil prices.</li>
+      <li><b>Japan and Korea:</b> EWJ and SJPA are Japan only. EWY is South Korea only, up 134% in one year, which is a flashing yellow light, not a green one. I assume Korea's market leans heavily on big chip makers, so it may not spread you away from tech. Check top holdings. I found no Irish-listed Korea fund in my data.</li>
+      <li><b>One-country funds</b> (Japan, Korea) are riskier than whole-world funds. "Global" = VT, VWRA, ACWI and the SPDR ACWI fund above.</li>
       <li><b>Spread ≠ safe.</b> Holding different things helps, but in a crash many things fall together. Property (VNQ) did only +7% over 5 years here.</li>
       <li><b>Past is not a forecast.</b> The last 3 years were strong for shares. Bonds went nowhere over 5.</li>
       <li><b>Tax columns are rough.</b> "Up to $50k" = yield × rate, before any credit for the 15% US tax already withheld. "Over $50k" = 5% × rate, same for every fund. Bond funds may be treated differently. Ask an accountant.</li>
@@ -223,6 +230,26 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
 </div></section>
 
 <!-- 6 TAX -->
+<section id="keep"><div class="wrap">
+  <h2>5b · Keep it small: 3 to 5 funds, then stop</h2>
+  <p class="lead">The list above is a menu. Nobody should order everything.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Why 3 to 5 max</h3><ul class="tight"><li>Funds <b>overlap</b>. A world fund already owns the same big companies as an S&amp;P 500 fund.</li><li>More funds = more fees to check, more tax paperwork, more things to watch, more urge to tinker.</li><li>Many people do fine with just 1 or 2.</li></ul><p class="small">Honest note: "3 to 5" is a common rule of thumb from index-investing teachers. I did not find a study proving it is the magic number.</p></div>
+    <div class="card"><h3>A simple shape (an example, not advice)</h3><ul class="tight"><li><b>Core:</b> 1 or 2 broad funds (whole world, or US plus rest of world).</li><li><b>Safety:</b> 1 bond or cash-like piece, if you need the money within a few years.</li><li><b>Spice:</b> 0 to 2 small bets (gold, one country, one sector). A common rule of thumb keeps all spice to a small slice, like 5 to 10%.</li></ul></div>
+    <div class="card"><h3>Red flags in a shortlist</h3><ul class="tight"><li>Two funds doing the same job (like VOO and CSPX).</li><li>Five funds all chasing the same hot theme.</li><li>A fund you can't explain in one sentence.</li><li>Buying it because it went up 100% last year.</li></ul></div>
+  </div>
+  <p class="small">Tip: tick funds in the table above. It counts them and warns about overlap.</p>
+
+  <h3 style="margin-top:24px">How often should you review? Once a year.</h3>
+  <p class="lead">Pick one fixed date. Twice a year at most. Not daily. Checking prices all the time makes people panic and sell at the wrong moment. <span class="small">I did not find a study proving the best rhythm. Once a year is the common default among index investors.</span></p>
+  <div class="grid g2">
+    <div class="card"><h3>The 4-question yearly check</h3><ol class="tight"><li>Is my <b>reason and timeline</b> the same?</li><li>Is any piece far off my plan (say more than 5 points)? If so, put <b>new money</b> into the smaller piece first. That is gentle "rebalancing".</li><li>Are the <b>fees</b> still fine?</li><li>Did a <b>rule change</b> (tax lines, limits)?</li></ol>
+    <p class="small"><b>Pick your date:</b> Near <b>31 March</b>, the end of the NZ tax year. Check your total offshore cost against the NZ$50k FIF line (and whether it has changed).</p></div>
+    <div class="card"><h3>Check sooner only if…</h3><ul class="tight"><li>Your job or income changes, or you move country.</li><li>A goal is about 5 years away. Then slowly shift toward safer pieces.</li><li>A fund closes or its fees jump.</li><li>You need the cash.</li></ul>
+    <h3 style="margin-top:12px">Don't</h3><ul class="tight"><li>Sell because of a headline.</li><li>Chase last year's winner.</li><li>Add a 6th fund "just because".</li></ul></div>
+  </div>
+</div></section>
+
 <section id="tax"><div class="wrap">
   <h2>6 · NZ tax decoder</h2>
   <p class="lead">Three questions. Gives you a pointer, not a tax return.</p>
@@ -301,7 +328,7 @@ var STEPS=[
  ["Build a cash cushion","Many NZ guides suggest ~3 months of costs in an easy-access account. Check Sorted for their current rule of thumb. This money is NOT for investing.","Safety first"],
  ["Kill expensive debt","Credit card and buy-now-pay-later debt cost more than most investments earn.","Guaranteed 'return'"],
  ["Check KiwiSaver and the employer match","If you qualify, find out what your employer adds. Pick a fund type that suits your timeline.","Free money"],
- ["Pick ONE boring, broad, low-fee fund","Read its Product Disclosure Statement. Write down the yearly fee and the worst past year.","Keep it simple"],
+ ["Pick ONE boring, broad, low-fee fund (3 to 5 funds max in total)","Read its Product Disclosure Statement. Write down the yearly fee and the worst past year.","Keep it simple"],
  ["Automate a tiny amount","Even $20–$50 a week. The point is the habit. Raise it later.","Baby step"],
  ["Write a 5-line plan","Why am I investing? For how long? What will I do if it falls 20%? When do I review (once a year)? What would make me sell?","Your framework"]
 ];
@@ -448,23 +475,51 @@ var LIST=[
  ["GLD","SPDR Gold Shares","US","NYSE Arca","Gold (no income)",8.74,120.67,134.95,0,0,false],
  ["SGLN","iShares Physical Gold ETC","IE","LSE (GBp)","Gold (ETC, not a UCITS fund)",9.04,122.47,138.19,0,0,true],
  ["SLV","iShares Silver Trust","US","NYSE Arca","Silver (no income, wild swings)",30.86,159.28,175.19,0,0,false],
- ["ISLN","iShares Physical Silver ETC","IE","LSE","Silver (ETC, not a UCITS fund)",31.26,161.61,179.33,0,0,true]
+ ["ISLN","iShares Physical Silver ETC","IE","LSE","Silver (ETC, not a UCITS fund)",31.26,161.61,179.33,0,0,true],
+ ["ACWI","iShares MSCI ACWI (all countries)","US","Nasdaq","Whole world, all sizes",16.49,80.46,73.28,1.44,0,false],
+ ["ACWI","SPDR MSCI ACWI UCITS (Acc)","IE","LSE","Whole world, all sizes",16.85,80.91,73.37,0,0,true],
+ ["EWJ","iShares MSCI Japan","US","NYSE Arca","Japan",25.81,76.63,56.47,3.48,0,false],
+ ["SJPA","iShares Core MSCI Japan (Acc)","IE","LSE (GBp)","Japan",25.79,78.22,57.27,0,0,true],
+ ["EWY","iShares MSCI South Korea","US","NYSE Arca","South Korea (one country, big swings)",133.99,231.95,152.11,1.33,0,false],
+ ["XLE","Energy Select Sector SPDR","US","NYSE Arca","Oil and gas (energy)",41.47,49.4,180.81,2.18,0,false],
+ ["IUES","iShares S&P 500 Energy (Acc)","IE","LSE","Oil and gas (energy)",41.6,47.25,175.46,0,0,true],
+ ["CPER","US Copper Index Fund","US","NYSE Arca","Copper (futures-based, no income)",32.8,71.98,58.79,0,0,false],
+ ["ICOP","iShares Copper & Metals Mining","US","Nasdaq","Copper mining companies (young fund)",44.36,138.59,null,1.91,0,false],
+ ["CPER","CoreShares Copper ETC","IE","LSE","Copper (ETC, not a UCITS fund)",null,null,null,0,0,true],
+ ["PPLT","abrdn Physical Platinum","US","NYSE Arca","Platinum (no income)",8.45,82.39,72.72,0,0,false],
+ ["SPLT","iShares Physical Platinum ETC","IE","LSE (GBp)","Platinum (ETC, not a UCITS fund)",8.89,84.6,76.22,0,0,true]
 ];
-var lfil="all";
-function ann(c,y){return (Math.pow(1+c/100,1/y)-1)*100}
-function pc(v){return '<span style="color:'+(v<0?"var(--coral)":"inherit")+'">'+(v>0?"+":"")+v.toFixed(1)+'%</span>'}
+var lfil="all",picks={};
+function ann(c,y){return c===null?null:(Math.pow(1+c/100,1/y)-1)*100}
+function per(c,y){return c===null?'':'<br><span class="small">'+pc(ann(c,y))+' / yr</span>'}
+function pc(v){if(v===null)return '<span class="small">no data</span>';return '<span style="color:'+(v<0?"var(--coral)":"inherit")+'">'+(v>0?"+":"")+v.toFixed(1)+'%</span>'}
 function renderList(){
   var amt=+$("lamt").value,r=+$("lrate").value/100;$("o_lamt").textContent=nz(amt);
-  var rows=LIST.filter(function(x){return lfil==="all"||x[2]===lfil});
-  $("ltable").innerHTML='<tr><th>Fund</th><th>Home</th><th>Job</th><th>1 yr</th><th>3 yr<br><span class="small">(per year)</span></th><th>5 yr<br><span class="small">(per year)</span></th><th>Yield</th><th>Est. NZ tax a year<br><span class="small">up to $50k total</span></th><th>Est. NZ tax a year<br><span class="small">over $50k (FDR)</span></th></tr>'+
+  var q=($("lsearch").value||"").toLowerCase().trim();
+  var rows=LIST.filter(function(x){return (lfil==="all"||x[2]===lfil)&&(!q||(x[0]+" "+x[1]+" "+x[4]).toLowerCase().indexOf(q)>-1)});
+  $("ltable").innerHTML='<tr><th>Pick</th><th>Fund</th><th>Home</th><th>Job</th><th>1 yr</th><th>3 yr<br><span class="small">(per year)</span></th><th>5 yr<br><span class="small">(per year)</span></th><th>Yield</th><th>Est. NZ tax a year<br><span class="small">up to $50k total</span></th><th>Est. NZ tax a year<br><span class="small">over $50k (FDR)</span></th></tr>'+
   rows.map(function(x){
     var t1=x[10]?0:amt*x[8]/100*r, t2=amt*0.05*r;
-    return '<tr><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+(x[2]==="US"?'<span class="tag red">US</span><br><span class="small">estate tax risk</span>':'<span class="tag green">Ireland</span><br><span class="small">'+(x[4].indexOf("ETC")>-1?"ETC (confirm issuer)":"UCITS")+'</span>')+'</td><td>'+x[4]+'</td><td>'+pc(x[5])+'</td><td>'+pc(x[6])+'<br><span class="small">'+pc(ann(x[6],3))+' / yr</span></td><td>'+pc(x[7])+'<br><span class="small">'+pc(ann(x[7],5))+' / yr</span></td><td>'+(x[10]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+nz(t1)+(x[10]?'<br><span class="small">(ask accountant)</span>':'')+'</td><td>'+nz(t2)+'</td></tr>';
+    return '<tr><td><input type="checkbox" data-i="'+LIST.indexOf(x)+'" '+(picks[LIST.indexOf(x)]?'checked':'')+' aria-label="Pick '+x[0]+'"></td><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+(x[2]==="US"?'<span class="tag red">US</span><br><span class="small">estate tax risk</span>':'<span class="tag green">Ireland</span><br><span class="small">'+(x[4].indexOf("ETC")>-1?"ETC (confirm issuer)":"UCITS")+'</span>')+'</td><td>'+x[4]+'</td><td>'+pc(x[5])+'</td><td>'+pc(x[6])+per(x[6],3)+'</td><td>'+pc(x[7])+per(x[7],5)+'</td><td>'+(x[10]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+nz(t1)+(x[10]?'<br><span class="small">(ask accountant)</span>':'')+'</td><td>'+nz(t2)+'</td></tr>';
   }).join("");
 }
-[["all","All 23"],["US","US-listed"],["IE","Irish UCITS"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
+[["all","All 35"],["US","US-listed"],["IE","Irish UCITS"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
 ["lamt","lrate"].forEach(function(id){$(id).addEventListener("input",renderList)});renderList();
 
+$("lsearch").addEventListener("input",renderList);
+$("ltable").addEventListener("change",function(e){var c=e.target;if(!c.dataset||c.dataset.i===undefined)return;picks[c.dataset.i]=c.checked;pickSummary()});
+function pickSummary(){
+  var ids=Object.keys(picks).filter(function(k){return picks[k]}),n=ids.length,h;
+  if(!n){$("picksum").textContent="Tick funds in the first column to build a shortlist (3 to 5 max).";return}
+  var names=ids.map(function(k){return LIST[k][0]}).join(", "),jobs={},dup=[];
+  ids.forEach(function(k){var j=LIST[k][4].replace(/ \(.*$/,"");if(jobs[j]){dup.push(jobs[j]+" and "+LIST[k][0]+" do the same job ("+j+")")}else jobs[j]=LIST[k][0]});
+  h="<b>Your shortlist ("+n+"): </b>"+names+".";
+  if(n>5)h+=" <b style='color:var(--coral)'>That is more than 5. Cut some. More funds means more overlap, fees and paperwork.</b>";
+  else if(n>=3)h+=" Good size.";
+  else h+=" Even 1 or 2 broad funds can be enough.";
+  if(dup.length)h+="<br><b style='color:var(--coral)'>Overlap:</b> "+dup.join("; ")+". Keep one.";
+  $("picksum").innerHTML=h;
+}
 /* ---- TAX DECODER ---- */
 function tax(){
   var q1=$("q1").value,cost=+$("q2").value||0,rate=+$("q3").value/100,val=+$("q4").value||0,h="";
