@@ -198,6 +198,24 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   <div class="tabs" id="etabs"></div>
   <div class="tblwrap"><table id="etable"></table></div>
   <div class="note"><b>Correcting a common claim:</b> you'll read that Irish funds "cut US dividend tax to 15%". True, but a US-listed ETF also gets 15% for a NZ resident if you file a <b>W-8BEN</b> form (otherwise 30%). So the withholding is about the same. The real differences are <b>US estate tax</b> and <b>what's available on your NZ platform</b>.</div>
+  <h3 style="margin-top:26px">The real list: 11 ETFs with real numbers</h3>
+  <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It covers global stocks, US stocks, ex-US, emerging markets and bonds, in both US and Irish versions.</p>
+  <div class="grid g3">
+    <label class="row"><span>Amount in each fund (NZD) <output id="o_lamt"></output></span><input type="range" id="lamt" min="1000" max="100000" step="1000" value="10000"></label>
+    <label class="row"><span>Your top tax rate</span>
+      <select id="lrate"><option value="10.5">10.5%</option><option value="17.5">17.5%</option><option value="30" selected>30%</option><option value="33">33%</option><option value="39">39%</option></select></label>
+    <div><span class="small">Show</span><div class="tabs" id="lfilter" style="margin-top:6px"></div></div>
+  </div>
+  <div class="tblwrap"><table id="ltable"></table></div>
+  <div class="note"><b>Read this before trusting any number above:</b>
+    <ul class="tight">
+      <li><b>Price only, not total return (my assumption).</b> Distributing funds (US ones, plus AGGG) pay cash out, so their price change leaves out income. Accumulating Irish funds reinvest inside, so their price includes it. That makes Irish funds look better than they are, and bonds look worse. Compare yield and price together.</li>
+      <li><b>Listing currency, not NZD.</b> Prices are in USD, except SWDA (British pence). NZD/USD moves change what she actually gets.</li>
+      <li><b>Start date shapes the story.</b> VT is +79% over 3 years but only +71% over 5. The 5-year window started near a market high. Never judge a fund on one window.</li>
+      <li><b>Past is not a forecast.</b> The last 3 years were strong for shares. Bonds went nowhere over 5.</li>
+      <li><b>Tax columns are rough.</b> "Up to $50k" = yield × rate, before any credit for the 15% US tax already withheld. "Over $50k" = 5% × rate, same for every fund. Bond funds may be treated differently. Ask an accountant.</li>
+      <li><b>Home (US/Ireland)</b> is from the fund names. I did not open each factsheet. Confirm domicile there. Fees (TER) are not shown. Check each factsheet.</li>
+    </ul></div>
   <div class="card"><b>US estate tax in one line:</b> if a non-US person owns more than about <b>US$60,000</b> of US-situs assets (this includes US-listed ETFs) when they die, the US can tax the excess at up to 40%. <span class="small">I checked: the US$60k figure appears across multiple sources. I did NOT confirm whether a NZ–US estate treaty changes this. Assume it applies and ask a tax specialist if you're heading past US$60k.</span></div>
 </div></section>
 
@@ -401,6 +419,36 @@ function renderEtf(i){
   $("etable").innerHTML='<tr><th style="width:36%">Question</th><th>'+ETF[i].n+'</th></tr>'+ETF[i].rows.map(function(r){return"<tr><td>"+r[0]+"</td><td>"+r[1]+"</td></tr>"}).join("");
 }
 ETF.forEach(function(e,i){var b=document.createElement("button");b.textContent=e.n;b.onclick=function(){renderEtf(i)};$("etabs").appendChild(b)});renderEtf(0);
+
+/* ---- ETF LIST ---- */
+/* [ticker,name,home,listing,job,p1,p3,p5,yield,aumB,acc] snapshot ~30 Oct 2026, IBKR; price change only */
+var LIST=[
+ ["VT","Vanguard Total World","US","NYSE Arca","Global stocks",16.32,79.03,71.14,1.55,81.8,false],
+ ["VWRA","Vanguard FTSE All-World (Acc)","IE","LSE (USD)","Global stocks",16.71,80.01,72.83,0,60.2,true],
+ ["SWDA","iShares Core MSCI World (Acc)","IE","LSE (GBp)","Developed-world stocks",15.25,79.06,75.85,0,147.2,true],
+ ["VOO","Vanguard S&P 500","US","NYSE Arca","US large companies",15.70,85.42,90.44,1.01,1030,false],
+ ["CSPX","iShares Core S&P 500 (Acc)","IE","LSE (USD)","US large companies",15.47,84.16,88.22,0,154.5,true],
+ ["VTI","Vanguard Total US Market","US","NYSE Arca","US whole market",15.33,83.04,80.70,1.04,689,false],
+ ["QQQ","Invesco QQQ (Nasdaq-100)","US","Nasdaq","Concentrated tech: higher risk",23.75,109.90,112.97,0.43,500,false],
+ ["VXUS","Vanguard Total Intl Stock","US","Nasdaq","Everything outside US",18.49,73.44,56.38,2.37,163.2,false],
+ ["EIMI","iShares Core EM IMI (Acc)","IE","LSE","Emerging markets",27.19,87.48,52.44,0,45.0,true],
+ ["BND","Vanguard Total Bond Market","US","Nasdaq","US bonds",-1.82,12.60,-3.17,4.12,161.4,false],
+ ["AGGG","iShares Core Global Agg Bond","IE","LSE","Global bonds",-2.50,11.62,-9.27,3.35,2.7,false]
+];
+var lfil="all";
+function ann(c,y){return (Math.pow(1+c/100,1/y)-1)*100}
+function pc(v){return '<span style="color:'+(v<0?"var(--coral)":"inherit")+'">'+(v>0?"+":"")+v.toFixed(1)+'%</span>'}
+function renderList(){
+  var amt=+$("lamt").value,r=+$("lrate").value/100;$("o_lamt").textContent=nz(amt);
+  var rows=LIST.filter(function(x){return lfil==="all"||x[2]===lfil});
+  $("ltable").innerHTML='<tr><th>Fund</th><th>Home</th><th>Job</th><th>1 yr</th><th>3 yr<br><span class="small">(per year)</span></th><th>5 yr<br><span class="small">(per year)</span></th><th>Yield</th><th>Est. NZ tax a year<br><span class="small">up to $50k total</span></th><th>Est. NZ tax a year<br><span class="small">over $50k (FDR)</span></th></tr>'+
+  rows.map(function(x){
+    var t1=x[10]?0:amt*x[8]/100*r, t2=amt*0.05*r;
+    return '<tr><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+(x[2]==="US"?'<span class="tag red">US</span><br><span class="small">estate tax risk</span>':'<span class="tag green">Ireland</span><br><span class="small">UCITS</span>')+'</td><td>'+x[4]+'</td><td>'+pc(x[5])+'</td><td>'+pc(x[6])+'<br><span class="small">'+pc(ann(x[6],3))+' / yr</span></td><td>'+pc(x[7])+'<br><span class="small">'+pc(ann(x[7],5))+' / yr</span></td><td>'+(x[10]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+nz(t1)+(x[10]?'<br><span class="small">(ask accountant)</span>':'')+'</td><td>'+nz(t2)+'</td></tr>';
+  }).join("");
+}
+[["all","All 11"],["US","US-listed"],["IE","Irish UCITS"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
+["lamt","lrate"].forEach(function(id){$(id).addEventListener("input",renderList)});renderList();
 
 /* ---- TAX DECODER ---- */
 function tax(){
