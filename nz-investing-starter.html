@@ -198,7 +198,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   <div class="tabs" id="etabs"></div>
   <div class="tblwrap"><table id="etable"></table></div>
   <div class="note"><b>Correcting a common claim:</b> you'll read that Irish funds "cut US dividend tax to 15%". True, but a US-listed ETF also gets 15% for a NZ resident if you file a <b>W-8BEN</b> form (otherwise 30%). So the withholding is about the same. The real differences are <b>US estate tax</b> and <b>what's available on your NZ platform</b>.</div>
-  <h3 style="margin-top:26px">The real list: 22 ETFs, not just tech</h3>
+  <h3 style="margin-top:26px">The real list: 23 ETFs, not just tech</h3>
   <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It covers global and US stocks, health care, everyday goods, smaller companies, property, gold, silver, emerging markets and bonds, in US and Irish versions. Broad index funds already hold a lot of big tech, so check each fund's top holdings.</p>
   <div class="grid g3">
     <label class="row"><span>Amount in each fund (NZD) <output id="o_lamt"></output></span><input type="range" id="lamt" min="1000" max="100000" step="1000" value="10000"></label>
@@ -462,7 +462,7 @@ function renderList(){
     return '<tr><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+(x[2]==="US"?'<span class="tag red">US</span><br><span class="small">estate tax risk</span>':'<span class="tag green">Ireland</span><br><span class="small">'+(x[4].indexOf("ETC")>-1?"ETC (confirm issuer)":"UCITS")+'</span>')+'</td><td>'+x[4]+'</td><td>'+pc(x[5])+'</td><td>'+pc(x[6])+'<br><span class="small">'+pc(ann(x[6],3))+' / yr</span></td><td>'+pc(x[7])+'<br><span class="small">'+pc(ann(x[7],5))+' / yr</span></td><td>'+(x[10]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+nz(t1)+(x[10]?'<br><span class="small">(ask accountant)</span>':'')+'</td><td>'+nz(t2)+'</td></tr>';
   }).join("");
 }
-[["all","All 22"],["US","US-listed"],["IE","Irish UCITS"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
+[["all","All 23"],["US","US-listed"],["IE","Irish UCITS"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
 ["lamt","lrate"].forEach(function(id){$(id).addEventListener("input",renderList)});renderList();
 
 /* ---- TAX DECODER ---- */

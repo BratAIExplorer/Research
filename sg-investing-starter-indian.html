@@ -209,7 +209,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   </table></div>
   <div class="note"><b>Fair challenge:</b> the articles saying "buy Irish funds!" are mostly written by companies that sell them. The facts check out, but see how small the dollars are: S$10,000 in VOO at about 1% yield = S$100 of dividends. 30% vs 15% is S$30 vs S$15. The <b>death-tax risk above US$60k</b> is the bigger deal. I did not confirm whether any treaty changes that. Assume it applies.</div>
 
-  <h3 style="margin-top:26px">The real list: 23 funds, not just tech</h3>
+  <h3 style="margin-top:26px">The real list: 24 funds, not just tech</h3>
   <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It spans the whole world, health care, everyday goods, smaller companies, property, gold, silver and bonds, in US and Irish versions. Broad index funds already hold a lot of big tech, so check each fund's top holdings.</p>
   <div class="grid g2">
     <label class="row"><span>Amount in each fund (S$) <output id="o_lamt"></output></span><input type="range" id="lamt" min="1000" max="100000" step="1000" value="10000"></label>
@@ -462,7 +462,7 @@ function renderList(){
     return '<tr><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+homeTag(x[2],x[4])+'</td><td>'+x[4]+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[5]))+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[6])+'<br><span class="small">'+pc(ann(x[6],3))+' / yr</span>')+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[7])+'<br><span class="small">'+pc(ann(x[7],5))+' / yr</span>')+'</td><td>'+(x[9]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+t+'</td></tr>';
   }).join("");
 }
-[["all","All 23"],["US","US-listed"],["IE","Irish UCITS"],["SG","Singapore"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
+[["all","All 24"],["US","US-listed"],["IE","Irish UCITS"],["SG","Singapore"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
 $("lamt").addEventListener("input",renderList);renderList();
 
 /* TAX */
