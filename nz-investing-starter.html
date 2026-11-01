@@ -198,8 +198,8 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   <div class="tabs" id="etabs"></div>
   <div class="tblwrap"><table id="etable"></table></div>
   <div class="note"><b>Correcting a common claim:</b> you'll read that Irish funds "cut US dividend tax to 15%". True, but a US-listed ETF also gets 15% for a NZ resident if you file a <b>W-8BEN</b> form (otherwise 30%). So the withholding is about the same. The real differences are <b>US estate tax</b> and <b>what's available on your NZ platform</b>.</div>
-  <h3 style="margin-top:26px">The real list: 11 ETFs with real numbers</h3>
-  <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It covers global stocks, US stocks, ex-US, emerging markets and bonds, in both US and Irish versions.</p>
+  <h3 style="margin-top:26px">The real list: 22 ETFs, not just tech</h3>
+  <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It covers global and US stocks, health care, everyday goods, smaller companies, property, gold, silver, emerging markets and bonds, in US and Irish versions. Broad index funds already hold a lot of big tech, so check each fund's top holdings.</p>
   <div class="grid g3">
     <label class="row"><span>Amount in each fund (NZD) <output id="o_lamt"></output></span><input type="range" id="lamt" min="1000" max="100000" step="1000" value="10000"></label>
     <label class="row"><span>Your top tax rate</span>
@@ -212,6 +212,9 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
       <li><b>Price only, not total return (my assumption).</b> Distributing funds (US ones, plus AGGG) pay cash out, so their price change leaves out income. Accumulating Irish funds reinvest inside, so their price includes it. That makes Irish funds look better than they are, and bonds look worse. Compare yield and price together.</li>
       <li><b>Listing currency, not NZD.</b> Prices are in USD, except SWDA (British pence). NZD/USD moves change what she actually gets.</li>
       <li><b>Start date shapes the story.</b> VT is +79% over 3 years but only +71% over 5. The 5-year window started near a market high. Never judge a fund on one window.</li>
+      <li><b>Gold and silver</b> pay no income and just track the metal. They were the top performers here (silver +159% over 3 years, gold +121%). That is exactly when people rush in. Silver swings far more than gold. Treat them as a small spice, not the meal. Whether a gold/silver fund counts as a FIF is a question for an accountant.</li>
+      <li><b>ETC, not UCITS:</b> the Irish-side gold and silver products are "ETCs", a different wrapper from a UCITS fund. Check who issues it and where.</li>
+      <li><b>Spread ≠ safe.</b> Holding different things helps, but in a crash many things fall together. Property (VNQ) did only +7% over 5 years here.</li>
       <li><b>Past is not a forecast.</b> The last 3 years were strong for shares. Bonds went nowhere over 5.</li>
       <li><b>Tax columns are rough.</b> "Up to $50k" = yield × rate, before any credit for the 15% US tax already withheld. "Over $50k" = 5% × rate, same for every fund. Bond funds may be treated differently. Ask an accountant.</li>
       <li><b>Home (US/Ireland)</b> is from the fund names. I did not open each factsheet. Confirm domicile there. Fees (TER) are not shown. Check each factsheet.</li>
@@ -433,7 +436,19 @@ var LIST=[
  ["VXUS","Vanguard Total Intl Stock","US","Nasdaq","Everything outside US",18.49,73.44,56.38,2.37,163.2,false],
  ["EIMI","iShares Core EM IMI (Acc)","IE","LSE","Emerging markets",27.19,87.48,52.44,0,45.0,true],
  ["BND","Vanguard Total Bond Market","US","Nasdaq","US bonds",-1.82,12.60,-3.17,4.12,161.4,false],
- ["AGGG","iShares Core Global Agg Bond","IE","LSE","Global bonds",-2.50,11.62,-9.27,3.35,2.7,false]
+ ["AGGG","iShares Core Global Agg Bond","IE","LSE","Global bonds",-2.50,11.62,-9.27,3.35,2.7,false],
+ ["XLV","Health Care Select Sector SPDR","US","NYSE Arca","Health care (not tech)",22.90,37.43,43.43,1.38,0,false],
+ ["IUHC","iShares S&P 500 Health Care (Acc)","IE","LSE","Health care (not tech)",22.53,36.13,41.31,0,0,true],
+ ["XLP","Consumer Staples Select Sector SPDR","US","NYSE Arca","Food, household goods (not tech)",5.62,27.00,33.58,2.46,0,false],
+ ["IUCS","iShares S&P 500 Consumer Staples (Acc)","IE","LSE","Food, household goods (not tech)",5.47,31.45,39.56,0,0,true],
+ ["VB","Vanguard Small-Cap","US","NYSE Arca","Smaller US companies",13.41,57.03,40.09,1.26,0,false],
+ ["WSML","iShares MSCI World Small Cap (Acc)","IE","LSE","Smaller companies, world",15.54,63.26,40.26,0,0,true],
+ ["VEA","Vanguard Developed Markets (non-US)","US","NYSE Arca","Europe, Japan, etc.",20.77,76.92,63.40,2.45,0,false],
+ ["VNQ","Vanguard Real Estate (REITs)","US","NYSE Arca","Property companies",1.68,33.25,6.89,3.63,0,false],
+ ["GLD","SPDR Gold Shares","US","NYSE Arca","Gold (no income)",8.74,120.67,134.95,0,0,false],
+ ["SGLN","iShares Physical Gold ETC","IE","LSE (GBp)","Gold (ETC, not a UCITS fund)",9.04,122.47,138.19,0,0,true],
+ ["SLV","iShares Silver Trust","US","NYSE Arca","Silver (no income, wild swings)",30.86,159.28,175.19,0,0,false],
+ ["ISLN","iShares Physical Silver ETC","IE","LSE","Silver (ETC, not a UCITS fund)",31.26,161.61,179.33,0,0,true]
 ];
 var lfil="all";
 function ann(c,y){return (Math.pow(1+c/100,1/y)-1)*100}
@@ -444,10 +459,10 @@ function renderList(){
   $("ltable").innerHTML='<tr><th>Fund</th><th>Home</th><th>Job</th><th>1 yr</th><th>3 yr<br><span class="small">(per year)</span></th><th>5 yr<br><span class="small">(per year)</span></th><th>Yield</th><th>Est. NZ tax a year<br><span class="small">up to $50k total</span></th><th>Est. NZ tax a year<br><span class="small">over $50k (FDR)</span></th></tr>'+
   rows.map(function(x){
     var t1=x[10]?0:amt*x[8]/100*r, t2=amt*0.05*r;
-    return '<tr><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+(x[2]==="US"?'<span class="tag red">US</span><br><span class="small">estate tax risk</span>':'<span class="tag green">Ireland</span><br><span class="small">UCITS</span>')+'</td><td>'+x[4]+'</td><td>'+pc(x[5])+'</td><td>'+pc(x[6])+'<br><span class="small">'+pc(ann(x[6],3))+' / yr</span></td><td>'+pc(x[7])+'<br><span class="small">'+pc(ann(x[7],5))+' / yr</span></td><td>'+(x[10]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+nz(t1)+(x[10]?'<br><span class="small">(ask accountant)</span>':'')+'</td><td>'+nz(t2)+'</td></tr>';
+    return '<tr><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+(x[2]==="US"?'<span class="tag red">US</span><br><span class="small">estate tax risk</span>':'<span class="tag green">Ireland</span><br><span class="small">'+(x[4].indexOf("ETC")>-1?"ETC (confirm issuer)":"UCITS")+'</span>')+'</td><td>'+x[4]+'</td><td>'+pc(x[5])+'</td><td>'+pc(x[6])+'<br><span class="small">'+pc(ann(x[6],3))+' / yr</span></td><td>'+pc(x[7])+'<br><span class="small">'+pc(ann(x[7],5))+' / yr</span></td><td>'+(x[10]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+nz(t1)+(x[10]?'<br><span class="small">(ask accountant)</span>':'')+'</td><td>'+nz(t2)+'</td></tr>';
   }).join("");
 }
-[["all","All 11"],["US","US-listed"],["IE","Irish UCITS"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
+[["all","All 22"],["US","US-listed"],["IE","Irish UCITS"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
 ["lamt","lrate"].forEach(function(id){$(id).addEventListener("input",renderList)});renderList();
 
 /* ---- TAX DECODER ---- */

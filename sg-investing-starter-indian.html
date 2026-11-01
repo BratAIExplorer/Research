@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Singapore Money Starter</title>
+<meta name="description" content="A simple, factual starter pack on investing for an Indian passport holder living in Singapore. Education only, not advice.">
+<style>
+:root{
+  --bg:#fff8f0; --card:#ffffff; --ink:#1d2433; --muted:#5f6878; --line:#eadfce;
+  --green:#8a1c2b; --lime:#ffd666; --coral:#e8590c; --sky:#e3f1ff; --sun:#ffd666; --warn:#fff1c9;
+  --shadow:0 6px 0 rgba(138,28,43,.14);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17141a; --card:#221d27; --ink:#f4eef2; --muted:#b7aebb; --line:#3a3140;
+    --green:#ff9aa8; --lime:#ffd666; --coral:#ff9a62; --sky:#23303f; --sun:#e9c156; --warn:#3a3217;
+    --shadow:0 6px 0 rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0 0 .5rem}
+a{color:var(--green);font-weight:600}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+.disclaimer{background:var(--warn);border-bottom:2px solid var(--sun);font-size:14px;padding:8px 0;text-align:center}
+header.hero{padding:44px 0 28px}
+.badge{display:inline-block;background:var(--lime);color:#2b1c00;font-weight:800;border-radius:99px;padding:4px 12px;font-size:13px;letter-spacing:.03em}
+.hero h1{font-size:clamp(2rem,6vw,3.6rem);margin-top:14px}
+.hero h1 em{color:var(--coral);font-style:normal}
+.hero p{max-width:640px;color:var(--muted);font-size:1.1rem}
+nav.chips{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0}
+nav.chips .wrap{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+nav.chips a{white-space:nowrap;text-decoration:none;font-size:14px;padding:6px 12px;border:2px solid var(--green);border-radius:99px;color:var(--green)}
+nav.chips a:hover{background:var(--green);color:var(--bg)}
+section{padding:36px 0 8px}
+section>.wrap>h2{font-size:clamp(1.6rem,4vw,2.2rem)}
+.lead{color:var(--muted);max-width:700px;margin:0 0 18px}
+.card{background:var(--card);border:2px solid var(--green);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--sky);color:var(--ink)}
+.tag.red{background:#ffd9d1;color:#6b1c0c}.tag.green{background:#d8f2c2;color:#1d4a0b}.tag.amber{background:var(--warn);color:var(--ink)}
+@media (prefers-color-scheme: dark){.tag.red{background:#5a2418;color:#ffd9d1}.tag.green{background:#254a14;color:#d8f2c2}}
+button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--green);background:var(--card);color:var(--green);border-radius:12px;padding:8px 14px}
+button:hover{background:var(--green);color:var(--bg)}
+button.on{background:var(--green);color:var(--bg)}
+button.big{background:var(--coral);border-color:var(--coral);color:#fff}
+.small{font-size:13px;color:var(--muted)}
+.note{border-left:5px solid var(--coral);background:var(--card);padding:10px 14px;border-radius:8px;margin:14px 0;font-size:15px}
+.bar{height:16px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0 14px}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--green));transition:width .4s}
+.step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:2px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--card)}
+.step input{width:24px;height:24px;margin-top:3px;accent-color:var(--green);flex:none}
+.step.done{opacity:.65}.step.done b{text-decoration:line-through}
+.step b{display:block}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+ul.tight{margin:.4rem 0;padding-left:1.2rem}
+label.row{display:block;margin:12px 0}
+label.row span{display:flex;justify-content:space-between;font-weight:600;gap:8px}
+input[type=range]{width:100%;accent-color:var(--green)}
+select,input[type=number]{font:inherit;padding:8px;border-radius:10px;border:2px solid var(--green);background:var(--card);color:var(--ink);width:100%}
+.stat{background:var(--sky);border-radius:14px;padding:12px}
+.stat b{display:block;font-size:1.4rem;font-family:Georgia,serif}
+svg text{fill:var(--muted);font-size:11px}
+.flip{perspective:900px;min-height:170px;cursor:pointer}
+.flip .in{position:relative;min-height:170px;transition:transform .5s;transform-style:preserve-3d}
+.flip.f .in{transform:rotateY(180deg)}
+.flip .a,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border:2px solid var(--green);border-radius:16px;padding:14px;background:var(--card);overflow:auto}
+.flip .a{background:var(--warn)}
+.flip .b{transform:rotateY(180deg)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+th{background:var(--sky)}
+.tblwrap{overflow-x:auto}
+.voice h3{font-size:1.1rem}
+.quiz button{display:block;width:100%;text-align:left;margin:6px 0}
+.quiz .ok{background:#d8f2c2!important;color:#1d4a0b!important;border-color:#6bb33a}
+.quiz .no{background:#ffd9d1!important;color:#6b1c0c!important;border-color:var(--coral)}
+.links a{display:block;text-decoration:none;color:inherit}
+.links .card{transition:transform .15s;height:100%}
+.links .card:hover{transform:translateY(-3px)}
+.links .u{font-size:12px;color:var(--muted);word-break:break-all}
+footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="disclaimer"><b>Learning only. Not financial advice.</b> Facts checked 1 Nov 2026. Rules change. Check with IRAS, India's tax office, or a licensed adviser before you act.</div>
+
+<header class="hero"><div class="wrap">
+  <span class="badge">INDIAN PASSPORT · LIVING IN SINGAPORE</span>
+  <h1>Singapore Money Starter:<br>small steps, <em>your own homework</em>.</h1>
+  <p>Two countries means two sets of rules. This page explains them in plain words, shows real fund numbers, and tells you where to check everything yourself. No hype. No "guaranteed returns".</p>
+  <p><button class="big" onclick="document.getElementById('steps').scrollIntoView()">Start with the 7 baby steps ↓</button></p>
+</div></header>
+
+<nav class="chips"><div class="wrap">
+  <a href="#two">0 Two countries</a><a href="#steps">1 Baby steps</a><a href="#vehicles">2 Where money goes</a><a href="#play">3 Playground</a><a href="#dip">4 Dip vs regular</a><a href="#etf">5 US vs Irish funds</a><a href="#tax">6 Tax decoder</a><a href="#myths">7 Myths</a><a href="#quiz">8 Quiz</a><a href="#links">9 Real links</a>
+</div></nav>
+
+<section id="two"><div class="wrap">
+  <h2>0 · The big idea: two countries, two rulebooks</h2>
+  <div class="grid g3">
+    <div class="card"><span class="tag green">SINGAPORE</span><h3>Where you live</h3>
+      <p>Sources say Singapore does <b>not</b> tax gains from long-term investing, and does not tax dividends from Singapore companies. That is friendly. But trading like a business can be taxed.</p></div>
+    <div class="card"><span class="tag red">USA</span><h3>The sneaky one</h3>
+      <p>Singapore has no tax deal with the US. So US-listed funds can lose <b>30%</b> of their dividends to the US. Plus a "death tax" risk above about US$60,000. Section 5 explains.</p></div>
+    <div class="card"><span class="tag amber">INDIA</span><h3>Where you're from</h3>
+      <p>If you buy <b>Indian</b> shares or funds, India can tax your gains even though you live abroad. Your passport doesn't change that. Where the investment is does.</p></div>
+  </div>
+  <div class="note"><b>Biggest question to answer first:</b> will this money be used <b>in Singapore, in India, or somewhere else</b>? Spending in one currency while investing in another adds a hidden risk: the exchange rate.</div>
+</div></section>
+
+<section id="steps"><div class="wrap">
+  <h2>1 · Seven baby steps</h2>
+  <p class="lead">Tick them off. Your ticks are saved on this device only.</p>
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="small" id="ptxt"></div>
+  <div id="steplist"></div>
+  <div class="note"><b>Order matters.</b> A credit card at 25% a year is a guaranteed 25% cost. No fund promises 25%. So: cushion and debt first.</div>
+</div></section>
+
+<section id="vehicles"><div class="wrap">
+  <h2>2 · Where can the money go?</h2>
+  <p class="lead">Four common places. Tap one. Company names are examples, not advice.</p>
+  <div class="tabs" id="vtabs"></div>
+  <div id="vpanels"></div>
+  <div class="note"><b>Important:</b> Singapore's CPF (the big government savings scheme) is for citizens and PRs. Sources say Employment Pass holders are <b>not</b> in it. So your own investing matters more. If you become a PR, that changes. Check.</div>
+</div></section>
+
+<section id="play"><div class="wrap">
+  <h2>3 · Playground: time and fees</h2>
+  <p class="lead">The growth rates are <b>made up</b> to show an idea. Real markets can fall for years. This is a "what if", not a promise.</p>
+  <div class="grid g2">
+    <div class="card">
+      <label class="row"><span>Start with <output id="o_start"></output></span><input type="range" id="start" min="0" max="50000" step="500" value="1000"></label>
+      <label class="row"><span>Add each month <output id="o_mo"></output></span><input type="range" id="mo" min="0" max="3000" step="25" value="300"></label>
+      <label class="row"><span>For how many years <output id="o_yrs"></output></span><input type="range" id="yrs" min="1" max="30" step="1" value="10"></label>
+      <label class="row"><span>Yearly fee of the fund <output id="o_fee"></output></span><input type="range" id="fee" min="0" max="2.5" step="0.05" value="0.3"></label>
+      <label class="row"><span>Optional: type today's S$1 = ₹ rate to see rupees</span><input type="number" id="fx" min="0" step="0.1" placeholder="e.g. type today's rate"></label>
+      <p class="small">Fee tip: 0.2% vs 1.5% a year sounds tiny. Slide it and watch the gap grow.</p>
+    </div>
+    <div class="card">
+      <svg id="chart" viewBox="0 0 400 220" width="100%" role="img" aria-label="Growth chart of three made-up scenarios"></svg>
+      <div class="grid g3" id="res" style="margin-top:8px"></div>
+      <p class="small">Grey dashed = money you put in. Orange = cautious (3%/yr before fee). Red = middle (6%). Yellow-green = strong (9%). Before tax and inflation.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Bumpy-road toy: invest every month vs wait for a dip</h3>
+  <p class="lead">A tiny computer game. It invents 2,000 random 10-year markets. Two people get the same pay-cheque money:<br>
+  <b>Regular Rita</b> invests every month. <b>Dip Dan</b> keeps cash (earning 3%) and only buys when the market is 10% below its high.</p>
+  <div class="grid g2">
+    <div class="card">
+      <button class="big" id="runsim">🎲 Roll 2,000 random markets</button>
+      <div id="simres" style="margin-top:12px" class="small">Press the button.</div>
+    </div>
+    <div class="card">
+      <svg id="path" viewBox="0 0 400 200" width="100%" role="img" aria-label="One random market path"></svg>
+      <button id="reroll">Show another random market</button>
+    </div>
+  </div>
+  <div class="note"><b>Honest warning:</b> in a toy, the answer depends on my made-up rules (markets drift up about 7% a year, with big swings). It is not proof. Real-world studies are in section 4.</div>
+</div></section>
+
+<section id="dip"><div class="wrap">
+  <h2>4 · "Buy the dip" or "buy regularly"?</h2>
+  <p class="lead">Tap each card. You get all three views, then the proof.</p>
+  <div class="grid g3">
+    <div class="flip" onclick="this.classList.toggle('f')"><div class="in">
+      <div class="a"><span class="tag green">TEAM REGULAR</span><h3>Invest on a schedule</h3><p>Tap ↻</p></div>
+      <div class="b"><ul class="tight"><li>No guessing. Less fear.</li><li>If you invest from your salary, you already do this.</li><li><b>Weak spot:</b> with a big lump sum, spreading it out usually costs a little (see Vanguard).</li></ul></div>
+    </div></div>
+    <div class="flip" onclick="this.classList.toggle('f')"><div class="in">
+      <div class="a"><span class="tag red">TEAM DIP</span><h3>Wait for a drop</h3><p>Tap ↻</p></div>
+      <div class="b"><ul class="tight"><li>Cheaper prices feel smart. Some value investors do this on purpose.</li><li><b>Weak spot:</b> you must spot the drop, buy while the news is scary, and not wait forever. Markets can rise for years without a 10% dip.</li></ul></div>
+    </div></div>
+    <div class="flip" onclick="this.classList.toggle('f')"><div class="in">
+      <div class="a"><span class="tag amber">TEAM MIX</span><h3>Regular + a bit extra in big falls</h3><p>Tap ↻</p></div>
+      <div class="b"><ul class="tight"><li>Keep the automatic plan. Keep a small pot for big falls.</li><li><b>Rule:</b> write it down <i>before</i> the fall.</li><li>Common and practical. Not proven to win.</li></ul></div>
+    </div></div>
+  </div>
+
+  <h3 style="margin-top:24px">The proof (go read it)</h3>
+  <ul class="tight">
+    <li><b>Vanguard</b> compared "invest all now" with "spread it out" in US, UK and Australian markets. Investing all now won about two-thirds of the time over a year. Spreading out still beat sitting in cash most of the time. Sources give 66–68%. Search "Vanguard cost averaging invest now or temporarily hold your cash". <span class="small">I checked that the finding is real. I did not confirm the exact % on Vanguard's own page.</span></li>
+    <li><b>Charles Schwab</b> compared pretend investors. One had <i>perfect</i> timing every year, one just invested on day one. Perfect timing won, but only a little. <a href="https://www.schwab.com/learn/story/does-market-timing-work" target="_blank" rel="noopener">Read it ↗</a></li>
+    <li><b>Other side:</b> Robert Shiller's work says high starting prices tend to mean weaker returns over the next 10–20 years. Price matters. It just doesn't tell you the <i>month</i>.</li>
+  </ul>
+
+  <h3 style="margin-top:24px">What famous investors say</h3>
+  <p class="small">My short paraphrases, not quotes. Read the originals.</p>
+  <div class="grid g2" id="voices"></div>
+</div></section>
+
+<section id="etf"><div class="wrap">
+  <h2>5 · US-listed vs Irish funds (the Singapore twist)</h2>
+  <p class="lead">Same companies inside. Different "box". The box changes how much US tax you lose.</p>
+  <div class="tblwrap"><table>
+    <tr><th></th><th>US-listed fund (e.g. VOO)</th><th>Irish "UCITS" fund (e.g. CSPX)</th></tr>
+    <tr><td>US tax on US dividends</td><td><b>30%</b> (Singapore has no US tax treaty)</td><td><b>~15%</b>, taken inside the fund (Ireland has a US treaty)</td></tr>
+    <tr><td>Can you claim it back?</td><td>No treaty, so no</td><td>No, it's already taken inside</td></tr>
+    <tr><td>US "death tax" risk</td><td>Yes: above about US$60,000 of US assets, up to 40%</td><td>Generally not US-situs</td></tr>
+    <tr><td>Singapore tax on the dividends</td><td colspan="2">Sources say foreign dividends to resident individuals are generally not taxed. Confirm with IRAS.</td></tr>
+    <tr><td>Easier to find</td><td>Most brokers</td><td>Some brokers. Check what yours offers</td></tr>
+  </table></div>
+  <div class="note"><b>Fair challenge:</b> the articles saying "buy Irish funds!" are mostly written by companies that sell them. The facts check out, but see how small the dollars are: S$10,000 in VOO at about 1% yield = S$100 of dividends. 30% vs 15% is S$30 vs S$15. The <b>death-tax risk above US$60k</b> is the bigger deal. I did not confirm whether any treaty changes that. Assume it applies.</div>
+
+  <h3 style="margin-top:26px">The real list: 23 funds, not just tech</h3>
+  <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It spans the whole world, health care, everyday goods, smaller companies, property, gold, silver and bonds, in US and Irish versions. Broad index funds already hold a lot of big tech, so check each fund's top holdings.</p>
+  <div class="grid g2">
+    <label class="row"><span>Amount in each fund (S$) <output id="o_lamt"></output></span><input type="range" id="lamt" min="1000" max="100000" step="1000" value="10000"></label>
+    <div><span class="small">Show</span><div class="tabs" id="lfilter" style="margin-top:6px"></div></div>
+  </div>
+  <div class="tblwrap"><table id="ltable"></table></div>
+  <div class="note"><b>Read before trusting the numbers:</b>
+    <ul class="tight">
+      <li><b>Price change only (my assumption).</b> US funds pay cash out, so their price leaves out income. "Acc" Irish funds reinvest inside, so their price includes it. That makes Irish funds look better and bond funds look worse.</li>
+      <li><b>Not in S$ or ₹.</b> Prices are in USD (SWDA: British pence). Your result changes with the exchange rate.</li>
+      <li><b>Start date matters.</b> VT: +79% over 3 years, but +71% over 5. Never judge on one window.</li>
+      <li><b>ES3</b> (Singapore's STI ETF) had no return data in my source, so I show none. I won't invent it.</li>
+      <li><b>"Home"</b> is from fund names. Confirm on each factsheet, where you'll also find fees (not shown here).</li>
+      <li><b>Gold and silver</b> make no income and just track the metal. They were the top performers in this list (silver +159% over 3 years, gold +121%). That is exactly when people rush in. Silver swings far more than gold. Treat them as a small spice, not the meal.</li>
+      <li><b>ETC, not UCITS:</b> the Irish-side gold and silver products are "ETCs", a different wrapper from a UCITS fund. Check who issues it and where.</li>
+      <li><b>Spread ≠ safe.</b> Holding different things helps, but in a crash many things fall together. Property (VNQ) did only +7% over 5 years here.</li>
+      <li>Past results are not a forecast.</li>
+    </ul></div>
+</div></section>
+
+<section id="tax"><div class="wrap">
+  <h2>6 · Tax decoder</h2>
+  <p class="lead">Two quick tools. They point the way. They are not a tax return.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Singapore side</h3>
+      <label class="row"><span>How many days a year do you live in Singapore?</span>
+        <select id="d1"><option value="y">183 days or more</option><option value="n">Less than 183</option></select></label>
+      <label class="row"><span>How do you invest?</span>
+        <select id="d2"><option value="hold">Buy and hold for years</option><option value="trade">Buy and sell often to make quick profits</option></select></label>
+      <div id="sgout" aria-live="polite"></div>
+    </div>
+    <div class="card">
+      <h3>India side (Indian shares / equity mutual funds)</h3>
+      <label class="row"><span>Your profit on the sale, in ₹</span><input type="number" id="ing" value="300000" min="0" step="10000"></label>
+      <label class="row"><span>How long did you hold it?</span>
+        <select id="inm"><option value="s">Less than 12 months</option><option value="l" selected>12 months or more</option></select></label>
+      <div id="inout" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h3>Cheat-sheet</h3><ul class="tight">
+      <li><b>Singapore:</b> sources say no tax on capital gains for individuals investing for the long term. Dividends from Singapore companies are tax-free to you. Trading as a business can be taxed.</li>
+      <li><b>US funds:</b> 30% US tax on dividends. See section 5.</li>
+      <li><b>India:</b> gains on Indian shares and funds are taxed in India even if you live abroad. The fund house usually takes the tax (TDS) before paying you. You may need to file an Indian tax return.</li>
+      <li><b>Money moves:</b> NRE and NRO are the two kinds of NRI bank accounts. They have different rules. Ask your bank.</li>
+    </ul></div>
+    <div class="card"><h3>Things I could not confirm</h3><ul class="tight">
+      <li class="small">The Indian rates in the box use 20% short-term and 12.5% long-term (above ₹1.25 lakh) for listed equity, as most sources say after July 2024. One source still showed the old 15%/10%. Check the Income Tax Department.</li>
+      <li class="small">Whether the India–Singapore tax treaty changes your case. Ask a tax adviser.</li>
+      <li class="small">FEMA rules on moving money between India and Singapore.</li>
+      <li class="small">Singapore Savings Bonds for foreigners. Two sources disagreed. Check MAS.</li>
+      <li class="small">The SRS (retirement top-up) limit for foreigners. Check IRAS.</li>
+      <li class="small">A 2024 rule (Section 10L) on foreign-asset gains. Sources disagree on whether it touches individuals. Check IRAS.</li>
+      <li class="small">Debt funds, bonds, and ULIP/insurance products are taxed differently. The box covers equity only.</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section id="myths"><div class="wrap">
+  <h2>7 · Myth or fact?</h2>
+  <p class="lead">Tap to flip.</p>
+  <div class="grid g3" id="mythgrid"></div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2>8 · Quick quiz</h2>
+  <div class="grid g2 quiz" id="quizbox"></div>
+  <p id="score" class="small"></p>
+</div></section>
+
+<section id="links"><div class="wrap">
+  <h2>9 · Real places to check everything</h2>
+  <p class="lead">Official or independent first. Broker articles are labelled, because they sell things.</p>
+  <div class="grid g3 links" id="linkgrid"></div>
+  <h3 style="margin-top:24px">Before giving anyone money, ask 4 things</h3>
+  <ol class="tight">
+    <li>Is this firm licensed by MAS? (Check the MAS register.)</li>
+    <li>What are <b>all</b> the fees, in dollars a year on my amount?</li>
+    <li>What is the worst year shown in the product document?</li>
+    <li>Do you get paid if I say yes?</li>
+  </ol>
+  <div class="note"><b>Red flags:</b> "guaranteed" returns, 15–20% "target" returns, WhatsApp or Telegram "tip groups", a countdown timer, "only a few slots", pressure to decide today. MAS has said scammers pretend to be licensed firms, so find the firm's number yourself and call it. A friend's private "opportunity" is a stranger's until you check the licence.<br><br>
+  <b>Also be careful with:</b> savings-plus-insurance bundles. They can have long lock-ins and costs. Ask for the full cost table and what you'd get back if you stopped early.</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p><b>Made for a friend.</b> This is general learning. It doesn't know your visa, income, debts or goals, so it can't say what's right for you. For personal advice, use a MAS-licensed adviser.</p>
+  <p>Last fact-check: 1 Nov 2026. Anything marked "I did not confirm" is an open question.</p>
+</div></footer>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var sg=function(n){return "S$"+Math.round(n).toLocaleString("en-SG")};
+var inr=function(n){return "₹"+Math.round(n).toLocaleString("en-IN")};
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+
+/* STEPS */
+var STEPS=[
+ ["Know your own rules","Your pass type, your tax days in Singapore, and whether you are in CPF (Employment Pass holders usually are not). Read the IRAS page in section 9.","30 min"],
+ ["Build a cash cushion","Many guides say 3 to 6 months of living costs in an easy-access account. This money is NOT for investing.","Safety first"],
+ ["Kill expensive debt","Credit card debt costs more than most investments earn.","Guaranteed 'return'"],
+ ["Pick the money's home","Will you spend this in Singapore, India or elsewhere? That decides which currency and which tax rules matter most.","Big question"],
+ ["Pick ONE boring, broad, low-fee fund","Read its fact sheet. Write down the yearly fee and its worst past year.","Keep it simple"],
+ ["Automate a tiny amount","Even S$50 a month. The habit is the point. Raise it later.","Baby step"],
+ ["Write a 5-line plan","Why am I investing? For how long? What will I do if it falls 20%? When will I review (once a year)? What would make me sell?","Your framework"]
+];
+var done={};
+try{done=JSON.parse(store("sgs_steps")||"{}")||{}}catch(e){done={}}
+function renderSteps(){
+  var box=$("steplist");box.innerHTML="";var n=0;
+  STEPS.forEach(function(s,i){
+    var d=!!done[i];if(d)n++;
+    var el=document.createElement("label");el.className="step"+(d?" done":"");
+    el.innerHTML='<input type="checkbox" '+(d?"checked":"")+'><div><b>'+(i+1)+'. '+s[0]+'</b><span class="small">'+s[1]+'</span> <span class="tag">'+s[2]+'</span></div>';
+    el.querySelector("input").addEventListener("change",function(e){done[i]=e.target.checked;store("sgs_steps",JSON.stringify(done));renderSteps()});
+    box.appendChild(el);
+  });
+  $("pbar").style.width=(n/STEPS.length*100)+"%";
+  $("ptxt").textContent=n===STEPS.length?"🎉 All 7 done. Now read one source from section 9.":n+" of 7 done. "+(n===0?"Step 1 takes 30 minutes.":"Nice. Keep going.");
+}
+renderSteps();
+
+/* VEHICLES */
+var VEH=[
+ {n:"Savings & fixed deposits",who:"Money you need within ~3 years, and your cushion",pros:["Known return, no ups and downs","Simple to open with a Singapore bank"],cons:["Interest rates change","Over many years can lose to inflation","Singapore Savings Bonds: sources disagree on whether foreigners can buy. Check MAS"],ask:"What is the rate after the promo ends, and is my money insured? (Check the Singapore deposit insurance scheme limit.)"},
+ {n:"Robo-advisors",who:"People who want it done for them",pros:["They pick and rebalance a mix for you","Start small","Examples in Singapore: Syfe, StashAway, Endowus (not endorsements)"],cons:["You pay a fee on top of fund fees. Compare in dollars","Less control","Some use Irish funds inside, others may not. Ask"],ask:"What is my total yearly cost, fund fees included, in dollars?"},
+ {n:"DIY brokers",who:"People who want control and will learn",pros:["Choose your own ETFs and shares","Low costs possible","Examples: Interactive Brokers, Moomoo, Tiger, FSMOne, Saxo, bank brokers (not endorsements)"],cons:["Easy to over-trade or chase hot stocks","You manage US tax forms and choices (US vs Irish funds)","Check which Irish funds your broker offers"],ask:"What are the trading fees, currency-exchange fees, and custody fees?"},
+ {n:"Investing back in India",who:"People who plan to return, or want rupee assets",pros:["Rupee assets match rupee spending","NRIs can generally invest via NRE/NRO accounts (check the rules)"],cons:["India taxes gains, with TDS taken at sale","You may need to file an Indian tax return","Rules about moving money (FEMA) apply. Ask your bank"],ask:"Which account (NRE or NRO) do I use, and what tax is taken when I sell?"}
+];
+function renderVeh(i){
+  var v=VEH[i];
+  [].forEach.call($("vtabs").children,function(b,j){b.classList.toggle("on",j===i)});
+  $("vpanels").innerHTML='<div class="card"><h3>'+v.n+'</h3><p class="small">Good for: '+v.who+'</p><div class="grid g2"><div><b>👍</b><ul class="tight">'+v.pros.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ul></div><div><b>👎</b><ul class="tight">'+v.cons.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ul></div></div><div class="note"><b>Ask:</b> '+v.ask+'</div></div>';
+}
+VEH.forEach(function(v,i){var b=document.createElement("button");b.textContent=v.n;b.onclick=function(){renderVeh(i)};$("vtabs").appendChild(b)});
+renderVeh(0);
+
+/* CALCULATOR */
+function fv(start,mo,yrs,rate){var m=rate/12,bal=start,out=[bal];for(var y=1;y<=yrs;y++){for(var k=0;k<12;k++){bal=bal*(1+m)+mo}out.push(bal)}return out}
+function calc(){
+  var s=+$("start").value,m=+$("mo").value,y=+$("yrs").value,f=+$("fee").value/100,fx=+$("fx").value||0;
+  $("o_start").textContent=sg(s);$("o_mo").textContent=sg(m);$("o_yrs").textContent=y+(y===1?" year":" years");$("o_fee").textContent=(f*100).toFixed(2)+"%";
+  var rates=[.03,.06,.09],cols=["#e8590c","#8a1c2b","#c9a400"],names=["Cautious","Middle","Strong"];
+  var sets=rates.map(function(r){return fv(s,m,y,r-f)});
+  var put=[];for(var i=0;i<=y;i++)put.push(s+m*12*i);
+  var max=Math.max.apply(null,sets[2].concat(put));
+  var W=400,H=220,pl=44,pb=22,pt=10,pr=8;
+  function X(i){return pl+(W-pl-pr)*i/Math.max(y,1)}
+  function Y(v){return H-pb-(H-pb-pt)*v/max}
+  function line(arr,c,w,dash){return '<polyline fill="none" stroke="'+c+'" stroke-width="'+w+'" '+(dash?'stroke-dasharray="4 3"':'')+' points="'+arr.map(function(v,i){return X(i)+","+Y(v)}).join(" ")+'"/>'}
+  var svg='<line x1="'+pl+'" y1="'+(H-pb)+'" x2="'+(W-pr)+'" y2="'+(H-pb)+'" stroke="#999"/><line x1="'+pl+'" y1="'+pt+'" x2="'+pl+'" y2="'+(H-pb)+'" stroke="#999"/>';
+  svg+='<text x="2" y="'+(pt+8)+'">'+sg(max)+'</text><text x="2" y="'+(H-pb)+'">S$0</text><text x="'+pl+'" y="'+(H-6)+'">now</text><text x="'+(W-pr-40)+'" y="'+(H-6)+'">'+y+' yrs</text>';
+  svg+=line(put,"#888",2,true);
+  sets.forEach(function(a,i){svg+=line(a,cols[i],3)});
+  $("chart").innerHTML=svg;
+  $("res").innerHTML=sets.map(function(a,i){return '<div class="stat"><span class="small">'+names[i]+'</span><b>'+sg(a[y])+'</b><span class="small">gain '+sg(a[y]-put[y])+(fx>0?'<br>≈ '+inr(a[y]*fx):'')+'</span></div>'}).join("");
+}
+["start","mo","yrs","fee","fx"].forEach(function(id){$(id).addEventListener("input",calc)});calc();
+
+/* TOY SIM */
+function randn(){var u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+var MU=0.0055,SIG=0.042,CASH=Math.pow(1.03,1/12)-1,MONTHS=120,DEP=500;
+function path(){var p=[1],x=1;for(var i=0;i<MONTHS;i++){x*=Math.exp(MU+SIG*randn());p.push(x)}return p}
+function run(p,track){
+  var uA=0,cash=0,uB=0,peak=p[0],buys=[];
+  for(var i=1;i<=MONTHS;i++){
+    var px=p[i];if(px>peak)peak=px;
+    uA+=DEP/px;cash=cash*(1+CASH)+DEP;
+    if(px<=0.9*peak&&cash>0){uB+=cash/px;cash=0;if(track)buys.push(i)}
+  }
+  var last=p[MONTHS];return {A:uA*last,B:uB*last+cash,buys:buys};
+}
+function srt(a){return a.slice().sort(function(x,y){return x-y})}
+function med(a){return srt(a)[Math.floor(a.length/2)]}
+function pct(a,q){return srt(a)[Math.floor(a.length*q)]}
+$("runsim").onclick=function(){
+  var A=[],B=[],win=0,N=2000;
+  for(var i=0;i<N;i++){var r=run(path());A.push(r.A);B.push(r.B);if(r.A>r.B)win++}
+  $("simres").innerHTML='Each person invests '+sg(DEP)+' a month for 10 years ('+sg(DEP*MONTHS)+' total).<br><br>'+
+   '<b>Regular Rita</b>: middle result '+sg(med(A))+' · unlucky 1-in-10: '+sg(pct(A,.1))+'<br>'+
+   '<b>Dip Dan</b>: middle result '+sg(med(B))+' · unlucky 1-in-10: '+sg(pct(B,.1))+'<br><br>'+
+   '<b>Rita beat Dan in '+Math.round(win/N*100)+'% of '+N.toLocaleString()+' markets.</b><br>'+
+   '<span class="small">Both can lose money in a bad market. The toy only shows that waiting does not reliably win. It does not prove either side.</span>';
+};
+function drawPath(){
+  var p=path(),r=run(p,true),W=400,H=200,pl=8,pb=14,pt=8,mx=Math.max.apply(null,p),mn=Math.min.apply(null,p);
+  function X(i){return pl+(W-2*pl)*i/MONTHS}
+  function Y(v){return H-pb-(H-pb-pt)*(v-mn)/(mx-mn)}
+  var s='<polyline fill="none" stroke="#8a1c2b" stroke-width="2.5" points="'+p.map(function(v,i){return X(i)+","+Y(v)}).join(" ")+'"/>';
+  r.buys.forEach(function(i){s+='<circle cx="'+X(i)+'" cy="'+Y(p[i])+'" r="5" fill="#e8590c"/>'});
+  s+='<text x="8" y="'+(H-2)+'">10 years →  orange dots = Dip Dan bought</text>';
+  $("path").innerHTML=s;
+}
+$("reroll").onclick=drawPath;drawPath();
+
+/* VOICES */
+var VOICES=[
+ ["Warren Buffett","Berkshire Hathaway","For his wife's inheritance he told the trustee: 90% in a very low-cost S&P 500 index fund, 10% in short-term government bonds.","Team Regular","https://www.berkshirehathaway.com/letters/2013ltr.pdf","2013 shareholder letter"],
+ ["Jack Bogle","Founder of Vanguard","Costs are the one thing you control. Own the whole market cheaply instead of hunting for the winning fund.","Team Regular","https://www.bogleheads.org/wiki/Main_Page","Bogleheads wiki"],
+ ["Benjamin Graham","Teacher of Buffett","Think of 'Mr Market', a moody partner who offers wild prices every day. Use his mood if it helps you. Don't follow it.","Team Dip (value view)","","Book: The Intelligent Investor"],
+ ["Howard Marks","Oaktree Capital","Nobody predicts the future. But you can notice where we are in the cycle and prepare. Free memos online.","Team Mix","https://www.oaktreecapital.com/insights/memos","Oaktree memos"],
+ ["Robert Shiller","Nobel economist","Starting prices matter. Very high prices have tended to be followed by weaker returns over 10–20 years. A caution, not a timing tool.","Other view","","Book: Irrational Exuberance"],
+ ["Burton Malkiel","Princeton economist","Most people, even professionals, can't reliably outguess prices. Broad index funds are a sensible default.","Team Regular","","Book: A Random Walk Down Wall Street"]
+];
+$("voices").innerHTML=VOICES.map(function(v){return '<div class="card voice"><span class="tag">'+v[3]+'</span><h3>'+v[0]+'</h3><div class="small">'+v[1]+'</div><p>'+v[2]+'</p>'+(v[4]?'<a href="'+v[4]+'" target="_blank" rel="noopener">'+v[5]+' ↗</a>':'<span class="small">'+v[5]+' (try the library)</span>')+'</div>'}).join("");
+
+/* ETF LIST: [ticker,name,home,listing,job,p1,p3,p5,yield,acc]  IBKR snapshot ~30 Oct 2026, price change only; null = no data */
+var LIST=[
+ ["VT","Vanguard Total World","US","NYSE Arca","Global stocks",16.32,79.03,71.14,1.55,false],
+ ["VWRA","Vanguard FTSE All-World (Acc)","IE","LSE (USD)","Global stocks",16.71,80.01,72.83,0,true],
+ ["SWDA","iShares Core MSCI World (Acc)","IE","LSE (GBp)","Developed-world stocks",15.25,79.06,75.85,0,true],
+ ["VOO","Vanguard S&P 500","US","NYSE Arca","US large companies",15.70,85.42,90.44,1.01,false],
+ ["CSPX","iShares Core S&P 500 (Acc)","IE","LSE (USD)","US large companies",15.47,84.16,88.22,0,true],
+ ["VTI","Vanguard Total US Market","US","NYSE Arca","US whole market",15.33,83.04,80.70,1.04,false],
+ ["QQQ","Invesco QQQ (Nasdaq-100)","US","Nasdaq","Concentrated tech: higher risk",23.75,109.90,112.97,0.43,false],
+ ["VXUS","Vanguard Total Intl Stock","US","Nasdaq","Everything outside US",18.49,73.44,56.38,2.37,false],
+ ["EIMI","iShares Core EM IMI (Acc)","IE","LSE","Emerging markets",27.19,87.48,52.44,0,true],
+ ["BND","Vanguard Total Bond Market","US","Nasdaq","US bonds",-1.82,12.60,-3.17,4.12,false],
+ ["AGGG","iShares Core Global Agg Bond","IE","LSE","Global bonds",-2.50,11.62,-9.27,3.35,false],
+ ["ES3","SPDR Straits Times Index (STI)","SG","SGX","Singapore's biggest companies",null,null,null,3.25,false],
+ ["XLV","Health Care Select Sector SPDR","US","NYSE Arca","Health care (not tech)",22.90,37.43,43.43,1.38,false],
+ ["IUHC","iShares S&P 500 Health Care (Acc)","IE","LSE","Health care (not tech)",22.53,36.13,41.31,0,true],
+ ["XLP","Consumer Staples Select Sector SPDR","US","NYSE Arca","Food, household goods (not tech)",5.62,27.00,33.58,2.46,false],
+ ["IUCS","iShares S&P 500 Consumer Staples (Acc)","IE","LSE","Food, household goods (not tech)",5.47,31.45,39.56,0,true],
+ ["VB","Vanguard Small-Cap","US","NYSE Arca","Smaller US companies",13.41,57.03,40.09,1.26,false],
+ ["WSML","iShares MSCI World Small Cap (Acc)","IE","LSE","Smaller companies, world",15.54,63.26,40.26,0,true],
+ ["VEA","Vanguard Developed Markets (non-US)","US","NYSE Arca","Europe, Japan, etc.",20.77,76.92,63.40,2.45,false],
+ ["VNQ","Vanguard Real Estate (REITs)","US","NYSE Arca","Property companies",1.68,33.25,6.89,3.63,false],
+ ["GLD","SPDR Gold Shares","US","NYSE Arca","Gold (no income)",8.74,120.67,134.95,0,false],
+ ["SGLN","iShares Physical Gold ETC","IE","LSE (GBp)","Gold (ETC, not a UCITS fund)",9.04,122.47,138.19,0,true],
+ ["SLV","iShares Silver Trust","US","NYSE Arca","Silver (no income, wild swings)",30.86,159.28,175.19,0,false],
+ ["ISLN","iShares Physical Silver ETC","IE","LSE","Silver (ETC, not a UCITS fund)",31.26,161.61,179.33,0,true]
+];
+var lfil="all";
+function ann(c,y){return (Math.pow(1+c/100,1/y)-1)*100}
+function pc(v){return '<span style="color:'+(v<0?"var(--coral)":"inherit")+'">'+(v>0?"+":"")+v.toFixed(1)+'%</span>'}
+function homeTag(h,job){return h==="US"?'<span class="tag red">US</span><br><span class="small">30% tax, death-tax risk</span>':h==="IE"?'<span class="tag green">Ireland</span><br><span class="small">'+(job.indexOf("ETC")>-1?"ETC (confirm issuer)":"UCITS")+'</span>':'<span class="tag green">Singapore</span>'}
+function renderList(){
+  var amt=+$("lamt").value;$("o_lamt").textContent=sg(amt);
+  var rows=LIST.filter(function(x){return lfil==="all"||x[2]===lfil});
+  $("ltable").innerHTML='<tr><th>Fund</th><th>Home</th><th>Job</th><th>1 yr</th><th>3 yr<br><span class="small">(per year)</span></th><th>5 yr<br><span class="small">(per year)</span></th><th>Yield</th><th>US tax taken from dividends / year</th></tr>'+
+  rows.map(function(x){
+    var r1=x[5]===null,t;
+    if(x[2]==="US")t=sg(amt*x[8]/100*0.30)+'<br><span class="small">30% of the dividend</span>';
+    else if(x[2]==="IE")t='<span class="small">About 15% of US-stock dividends, taken inside the fund (already in the price)</span>';
+    else t='<span class="small">None from the US. Singapore dividends are generally tax-free to you (confirm with IRAS)</span>';
+    return '<tr><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+homeTag(x[2],x[4])+'</td><td>'+x[4]+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[5]))+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[6])+'<br><span class="small">'+pc(ann(x[6],3))+' / yr</span>')+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[7])+'<br><span class="small">'+pc(ann(x[7],5))+' / yr</span>')+'</td><td>'+(x[9]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+t+'</td></tr>';
+  }).join("");
+}
+[["all","All 23"],["US","US-listed"],["IE","Irish UCITS"],["SG","Singapore"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
+$("lamt").addEventListener("input",renderList);renderList();
+
+/* TAX */
+function sgTax(){
+  var res=$("d1").value==="y",tr=$("d2").value==="trade",h="";
+  h+=res?'<span class="tag green">Likely a Singapore tax resident</span><p>Sources say long-term investing gains and Singapore dividends are not taxed for individuals. Your salary is taxed. Confirm on IRAS.</p>':'<span class="tag amber">Maybe not a tax resident</span><p>Your tax status changes the rules. Check IRAS before you do anything.</p>';
+  if(tr)h+='<span class="tag red">Careful</span><p>If you trade often like a business, IRAS can treat profits as income and tax them. Long-term holding is the safer idea.</p>';
+  $("sgout").innerHTML=h;
+}
+function inTax(){
+  var g=+$("ing").value||0,sh=$("inm").value==="s",t,txt;
+  if(sh){t=g*0.20;txt='Short-term: 20% × '+inr(g)+' = <b>'+inr(t)+'</b>.'}
+  else{var x=Math.max(g-125000,0);t=x*0.125;txt='Long-term: first ₹1,25,000 of gains is exempt, then 12.5% × '+inr(x)+' = <b>'+inr(t)+'</b>.'}
+  $("inout").innerHTML='<span class="tag amber">Rough estimate, listed equity only</span><p>'+txt+' That is about '+(g>0?(t/g*100).toFixed(1):"0")+'% of your profit. Extra charges (surcharge, cess) and treaty effects are not included. A fund house usually deducts this for you at sale.</p>';
+}
+["d1","d2"].forEach(function(id){$(id).addEventListener("input",sgTax)});sgTax();
+["ing","inm"].forEach(function(id){$(id).addEventListener("input",inTax)});inTax();
+
+/* MYTHS */
+var MYTHS=[
+ ["\"Singapore has no tax on investing, so I keep everything.\"","Not quite. Long-term gains are generally untaxed, but trading as a business can be taxed. US-listed funds lose 30% of dividends to the US. And India taxes gains on Indian assets."],
+ ["\"Irish funds are always better.\"","They cut US dividend tax from 30% to about 15% and avoid the US death-tax risk. But the dollars saved on small amounts are small, choice can be narrower, and many articles saying so are written by sellers."],
+ ["\"My Indian passport means I can't invest in India.\"","NRIs can generally invest through NRE/NRO accounts, with rules. Tax is taken at sale. Ask your bank and check FEMA rules."],
+ ["\"Savings-plus-insurance plans are the safe way.\"","They can be costly and locked-in. Ask for the full cost table and what you'd get back if you stopped early. Compare with simple options."],
+ ["\"Index funds can't lose.\"","They can fall 30–50% and take years to recover. Only invest money you won't need soon."],
+ ["\"I should wait for the perfect moment.\"","Schwab's study found even perfect timing beat investing on day one only by a modest amount. Waiting often costs more than it saves."]
+];
+$("mythgrid").innerHTML=MYTHS.map(function(m){return '<div class="flip" onclick="this.classList.toggle(\'f\')"><div class="in"><div class="a"><span class="tag red">MYTH?</span><p><b>'+m[0]+'</b></p></div><div class="b"><span class="tag green">REALITY</span><p>'+m[1]+'</p></div></div></div>'}).join("");
+
+/* QUIZ */
+var Q=[
+ ["Does Singapore have a tax treaty with the US?",["Yes","No, so US-listed fund dividends lose 30%","Only for Indians"],1],
+ ["Above roughly how much US stuff can the US 'death tax' hit a non-US person?",["US$60,000","US$6 million","There is no such tax"],0],
+ ["If you sell Indian equity funds at a profit while living in Singapore…",["India may still tax the gain","Nobody taxes it","Singapore taxes it at 50%"],0],
+ ["Which comes BEFORE investing?",["Paying off a 25% credit card","Buying a hot stock","Waiting for a crash"],0],
+ ["Someone offers 'target returns of 15–20%' in a WhatsApp group…",["Great, join","Red flag. Check the MAS register and call the firm yourself","Tell friends"],1]
+];
+var got=0,answered=0;
+$("quizbox").innerHTML=Q.map(function(q,qi){return '<div class="card" data-q="'+qi+'"><b>'+(qi+1)+'. '+q[0]+'</b>'+q[1].map(function(o,oi){return '<button data-o="'+oi+'">'+o+'</button>'}).join("")+'</div>'}).join("");
+$("quizbox").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;var card=b.parentNode;if(card.dataset.done)return;
+  var qi=+card.dataset.q,oi=+b.dataset.o;card.dataset.done=1;answered++;
+  if(oi===Q[qi][2]){b.classList.add("ok");got++}else{b.classList.add("no");card.querySelector('[data-o="'+Q[qi][2]+'"]').classList.add("ok")}
+  $("score").textContent=got+" / "+answered+" right"+(answered===Q.length?(got===Q.length?" 🏆 Nailed it.":" · Flip back to what you missed."):"");
+});
+
+/* LINKS */
+var LINKS=[
+ ["MoneySense (MAS)","Singapore's free, official money-education site","https://www.moneysense.gov.sg"],
+ ["MAS Investor Alert List","Firms that are NOT licensed. Not a full list: always check the licence too","https://www.mas.gov.sg/ial"],
+ ["MoneySense: unregulated persons","How to deal with firms that aren't licensed","https://moneysense.gov.sg/dealing-with-unregulated-persons"],
+ ["IRAS","Singapore's tax office: your tax residency, income, and what's taxed","https://www.iras.gov.sg"],
+ ["SGX","Singapore Exchange: STI ETF, other local products, investor education","https://www.sgx.com"],
+ ["CPF Board","Who is in CPF, and what changes if you become a PR","https://www.cpf.gov.sg"],
+ ["India Income Tax Department","NRI tax rules, filing, TDS","https://www.incometax.gov.in"],
+ ["Reserve Bank of India","FEMA and NRE/NRO account rules","https://www.rbi.org.in"],
+ ["AMFI (India mutual funds)","Official data and investor info on Indian mutual funds","https://www.amfiindia.com"],
+ ["SEBI Investor site","India's market regulator: investor education and complaints","https://investor.sebi.gov.in"],
+ ["Schwab: Does Market Timing Work?","The 'perfect timing' study","https://www.schwab.com/learn/story/does-market-timing-work"],
+ ["S&P SPIVA scorecards","Do active funds beat the index? Free data","https://www.spglobal.com/spdji/en/research-insights/spiva/"],
+ ["Buffett 2013 letter","His 90/10 advice","https://www.berkshirehathaway.com/letters/2013ltr.pdf"],
+ ["Bogleheads wiki","Community of low-cost index investors","https://www.bogleheads.org/wiki/Main_Page"],
+ ["StashAway: US dividend and estate tax (broker article)","Explains the 30% and US$60k points. Written by a seller, so cross-check","https://www.stashaway.sg/r/dividend-withholding-tax-estate-tax-us-equities-singapore"],
+ ["Endowus: tax on US-listed ETFs (broker article)","Same topic. Also written by a seller","https://endowus.com/insights/an-inconvenient-truth-tax-on-us-listed-etfs-04c7532c5d"]
+];
+$("linkgrid").innerHTML=LINKS.map(function(l){return '<a href="'+l[2]+'" target="_blank" rel="noopener"><div class="card"><b>'+l[0]+' ↗</b><p class="small" style="margin:.3rem 0">'+l[1]+'</p><div class="u">'+l[2].replace(/^https?:\/\//,"").slice(0,60)+'…</div></div></a>'}).join("");
+})();
+</script>
+</body>
+</html>
