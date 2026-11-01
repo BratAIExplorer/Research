@@ -85,6 +85,20 @@ th{background:var(--sky)}
 .links .u{font-size:12px;color:var(--muted);word-break:break-all}
 footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.therm{height:18px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}
+.therm>i{display:block;height:100%;border-radius:99px;transition:width .3s}
+.feerow{margin:14px 0}
+.feebar{display:flex;height:24px;border-radius:8px;overflow:hidden;border:2px solid var(--green);background:repeating-linear-gradient(45deg,var(--coral) 0 6px,transparent 6px 12px)}
+.feebar>i{display:block;background:var(--green)}
+input.t,textarea.t{font:inherit;padding:8px;border-radius:10px;border:2px solid var(--green);background:var(--card);color:var(--ink);width:100%}
+textarea.t{min-height:210px;resize:vertical;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px}
+.wordgrid .card h3{font-size:1.05rem}
+.eli{display:block;margin-top:4px}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:8px 0}
+.chk input{width:22px;height:22px;accent-color:var(--green);flex:none;margin-top:2px}
+.chk.done span{text-decoration:line-through;opacity:.6}
+@media print{body.pp .disclaimer,body.pp header,body.pp nav,body.pp footer,body.pp section:not(#plan){display:none!important}body.pp #plan button{display:none}}
 </style>
 </head>
 <body>
@@ -95,10 +109,11 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   <h1>Singapore Money Starter:<br>small steps, <em>your own homework</em>.</h1>
   <p>Two countries means two sets of rules. This page explains them in plain words, shows real fund numbers, and tells you where to check everything yourself. No hype. No "guaranteed returns".</p>
   <p><button class="big" onclick="document.getElementById('steps').scrollIntoView()">Start with the 7 baby steps ↓</button></p>
+<p style="margin-top:6px"><span class="tag green">Play with money maths</span> <span class="tag">Explore 40 real ETFs</span> <span class="tag amber">Do a research quest</span> <span class="tag red">Write your own 5-line plan</span></p>
 </div></header>
 
 <nav class="chips"><div class="wrap">
-  <a href="#two">0 Two countries</a><a href="#steps">1 Baby steps</a><a href="#vehicles">2 Where money goes</a><a href="#play">3 Playground</a><a href="#dip">4 Dip vs regular</a><a href="#etf">5 US vs Irish funds</a><a href="#keep">5b 3-5 funds + review</a><a href="#tax">6 Tax decoder</a><a href="#myths">7 Myths</a><a href="#quiz">8 Quiz</a><a href="#links">9 Real links</a>
+  <a href="#two">0 Two countries</a><a href="#steps">1 Baby steps</a><a href="#vehicles">2 Where money goes</a><a href="#play">3 Playground</a><a href="#dip">4 Dip vs regular</a><a href="#etf">5 US vs Irish funds</a><a href="#keep">5b 3-5 funds + review</a><a href="#quest">5c Research quest</a><a href="#plan">5d My 5-line plan</a><a href="#tax">6 Tax decoder</a><a href="#myths">7 Myths</a><a href="#words">7b Money words</a><a href="#quiz">8 Quiz</a><a href="#links">9 Real links</a>
 </div></nav>
 
 <section id="two"><div class="wrap">
@@ -164,6 +179,20 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
     </div>
   </div>
   <div class="note"><b>Honest warning:</b> in a toy, the answer depends on my made-up rules (markets drift up about 7% a year, with big swings). It is not proof. Real-world studies are in section 4.</div>
+
+  <h3 style="margin-top:28px">The fee caterpillar 🐛</h3>
+  <p class="lead">Same money, same made-up 6% a year before fees. Only the fund's yearly fee changes. It uses the start, monthly and years sliders above. Green = what you keep. Striped = what the fee ate.</p>
+  <div class="card" id="feebox" aria-live="polite"></div>
+
+  <h3 style="margin-top:28px">Crash practice 🎢 (pretend, no real money)</h3>
+  <p class="lead">Every investor meets a crash. Practise being calm <i>now</i>, while it is only a slider.</p>
+  <div class="grid g2">
+    <div class="card">
+      <label class="row"><span>Pretend pot <output id="o_cpot"></output></span><input type="range" id="cpot" min="1000" max="100000" step="1000" value="10000"></label>
+      <label class="row"><span>Market falls by <output id="o_cfall"></output></span><input type="range" id="cfall" min="5" max="70" step="5" value="30"></label>
+    </div>
+    <div class="card" id="crashout" aria-live="polite"></div>
+  </div>
 </div></section>
 
 <section id="dip"><div class="wrap">
@@ -209,11 +238,11 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   </table></div>
   <div class="note"><b>Fair challenge:</b> the articles saying "buy Irish funds!" are mostly written by companies that sell them. The facts check out, but see how small the dollars are: S$10,000 in VOO at about 1% yield = S$100 of dividends. 30% vs 15% is S$30 vs S$15. The <b>death-tax risk above US$60k</b> is the bigger deal. I did not confirm whether any treaty changes that. Assume it applies.</div>
 
-  <h3 style="margin-top:26px">The real list: 36 funds, not just tech</h3>
+  <h3 style="margin-top:26px">The real list: 40 funds, not just tech</h3>
   <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It spans the whole world, health care, everyday goods, smaller companies, property, gold, silver and bonds, in US and Irish versions. Broad index funds already hold a lot of big tech, so check each fund's top holdings.</p>
   <div class="grid g2">
     <label class="row"><span>Amount in each fund (S$) <output id="o_lamt"></output></span><input type="range" id="lamt" min="1000" max="100000" step="1000" value="10000"></label>
-    <label class="row"><span>Search (try: gold, japan, copper)</span><input type="text" id="lsearch" placeholder="type here" style="font:inherit;padding:8px;border-radius:10px;border:2px solid var(--green);width:100%;background:var(--card);color:var(--ink)"></label>
+    <label class="row"><span>Search (try: gold, japan, copper)</span><input type="text" id="lsearch" placeholder="searches all funds" style="font:inherit;padding:8px;border-radius:10px;border:2px solid var(--green);width:100%;background:var(--card);color:var(--ink)"></label>
     <div><span class="small">Show</span><div class="tabs" id="lfilter" style="margin-top:6px"></div></div>
   </div>
   <div class="tblwrap"><table id="ltable"></table></div>
@@ -232,6 +261,8 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
       <li><b>Energy</b> (XLE, IUES) is up about 180% over 5 years, but that window started at an oil slump. It swings with oil prices.</li>
       <li><b>Japan and Korea:</b> EWJ and SJPA are Japan only. EWY is South Korea only, up 134% in one year, which is a flashing yellow light, not a green one. I assume Korea's market leans heavily on big chip makers, so it may not spread you away from tech. Check top holdings. I found no Irish-listed Korea fund in my data.</li>
       <li><b>One-country funds</b> (Japan, Korea) are riskier than whole-world funds. "Global" = VT, VWRA, ACWI and the SPDR ACWI fund above.</li>
+      <li><b>Filter note:</b> "Broad &amp; plain" is only a starting view of wide, single-job funds. It is not a recommendation. Press "All" or use the search box to see everything.</li>
+      <li><b>Newest rows (VHYA, SCHD, IGF, ICOM):</b> numbers from IBKR, same date. I <b>assume</b> VHYA and ICOM are accumulating (they show 0% yield; confirm on the fact sheet). I understand ICOM holds commodity futures through swaps, not companies. Check the top holdings of SCHD and IGF yourself.</li>
       <li><b>Spread ≠ safe.</b> Holding different things helps, but in a crash many things fall together. Property (VNQ) did only +7% over 5 years here.</li>
       <li>Past results are not a forecast.</li>
     </ul></div>
@@ -257,6 +288,38 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   </div>
 </div></section>
 
+<section id="quest"><div class="wrap">
+  <h2>5c · Research quest 🔎</h2>
+  <p class="lead">Real investors don't trust a table, even this one. They look inside. Press the button, get a mystery fund from the list, and answer 6 questions from its official fact sheet. About 15 minutes. No money involved, and this is <b>not</b> a tip to buy it.</p>
+  <button class="big" id="questbtn">🎲 Give me a fund to investigate</button>
+  <div class="card" id="questout" style="margin-top:12px" hidden></div>
+</div></section>
+
+<section id="plan"><div class="wrap">
+  <h2>5d · Write your own 5-line plan ✍️</h2>
+  <p class="lead">This is the most useful thing on the page. Five short lines, written while you are calm. Saved on this device only. The lists under the boxes are ideas, not advice.</p>
+  <div class="grid g2">
+    <div class="card">
+      <label class="row"><span>1. Why am I investing?</span><input class="t" type="text" id="pl1" list="dl1" maxlength="120" placeholder="e.g. a house deposit in 8 years"></label>
+      <datalist id="dl1"><option value="A house deposit"><option value="Retirement, a long way off"><option value="Building wealth slowly"><option value="My child's future"></datalist>
+      <label class="row"><span>2. For how many years can I leave it alone?</span><input class="t" type="number" id="pl2" min="0" max="60" placeholder="e.g. 10"></label>
+      <label class="row"><span>3. If it falls 20%, I will…</span><input class="t" type="text" id="pl3" list="dl3" maxlength="140" placeholder="write it before it happens"></label>
+      <datalist id="dl3"><option value="Do nothing and keep my automatic buys"><option value="Re-read this plan and wait a week before any decision"><option value="Only top up from the small pot I set aside"></datalist>
+      <label class="row"><span>4. My yearly review date</span><input class="t" type="date" id="pl4"></label>
+      <p class="small">Pick one date a year. A good one is just before <b>Singapore tax filing (April)</b>. If you hold Indian assets, also note India's <b>31 March</b> year-end.</p>
+      <label class="row"><span>5. What would make me sell?</span><input class="t" type="text" id="pl5" list="dl5" maxlength="140" placeholder="and what would NOT"></label>
+      <datalist id="dl5"><option value="My reason or timeline changed"><option value="I need the cash"><option value="The fund closed or its fees jumped"><option value="NOT a scary headline"></datalist>
+    </div>
+    <div class="card">
+      <b>Your plan</b>
+      <textarea class="t" id="plout" readonly aria-label="Your plan as text"></textarea>
+      <p style="margin:10px 0 0"><button id="plcopy">📋 Copy</button> <button id="plprint">🖨 Print / save as PDF</button> <button id="plclear">Clear</button></p>
+      <p class="small" id="plmsg" aria-live="polite"></p>
+      <p class="small">Your shortlist in section 5 is added automatically (tick funds there).</p>
+    </div>
+  </div>
+</div></section>
+
 <section id="tax"><div class="wrap">
   <h2>6 · Tax decoder</h2>
   <p class="lead">Two quick tools. They point the way. They are not a tax return.</p>
@@ -276,6 +339,18 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
         <select id="inm"><option value="s">Less than 12 months</option><option value="l" selected>12 months or more</option></select></label>
       <div id="inout" aria-live="polite"></div>
     </div>
+  </div>
+    <div class="grid g2" style="margin-top:14px">
+    <div class="card">
+      <h3>US "death tax" gauge</h3>
+      <label class="row"><span>Value of US-listed funds you hold, in US$</span><input type="number" id="us60" value="20000" min="0" step="1000"></label>
+      <div id="us60out" aria-live="polite"></div>
+    </div>
+    <div class="card"><h3>How to read it</h3><ul class="tight">
+      <li>The line is about <b>US$60,000</b> of US assets (this includes US-listed ETFs) when a non-US person dies. Above it, the US can tax the excess at up to 40%.</li>
+      <li>Irish-listed funds are generally not counted as US assets, which is why people look at them.</li>
+      <li class="small">I did not confirm whether any treaty changes this for you. Assume it applies and ask a tax specialist near the line.</li>
+    </ul></div>
   </div>
   <div class="grid g2" style="margin-top:14px">
     <div class="card"><h3>Cheat-sheet</h3><ul class="tight">
@@ -300,6 +375,13 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px}
   <h2>7 · Myth or fact?</h2>
   <p class="lead">Tap to flip.</p>
   <div class="grid g3" id="mythgrid"></div>
+</div></section>
+
+<section id="words"><div class="wrap">
+  <h2>7b · Money words, in plain English</h2>
+  <p class="lead">Stuck on a word? Type it here. Each answer is written for a 10-year-old.</p>
+  <label class="row"><span>Search the words</span><input class="t" type="text" id="wsearch" placeholder="try: dividend, ETF, UCITS"></label>
+  <div class="grid g3 wordgrid" id="wordgrid"></div>
 </div></section>
 
 <section id="quiz"><div class="wrap">
@@ -483,9 +565,13 @@ var LIST=[
  ["ICOP","iShares Copper & Metals Mining","US","Nasdaq","Copper mining companies (young fund)",44.36,138.59,null,1.91,false],
  ["CPER","CoreShares Copper ETC","IE","LSE","Copper (ETC, not a UCITS fund)",null,null,null,0,true],
  ["PPLT","abrdn Physical Platinum","US","NYSE Arca","Platinum (no income)",8.45,82.39,72.72,0,false],
- ["SPLT","iShares Physical Platinum ETC","IE","LSE (GBp)","Platinum (ETC, not a UCITS fund)",8.89,84.6,76.22,0,true]
+ ["SPLT","iShares Physical Platinum ETC","IE","LSE (GBp)","Platinum (ETC, not a UCITS fund)",8.89,84.6,76.22,0,true],
+ ["VHYA","Vanguard FTSE All-World High Dividend Yield (Acc)","IE","LSE","Global companies that pay big dividends",19.05,70.25,74.0,0,true],
+ ["SCHD","Schwab US Dividend Equity","US","NYSE Arca","US companies with steady dividends",23.37,53.85,57.29,2.96,false],
+ ["IGF","iShares Global Infrastructure","US","Nasdaq","Infrastructure: roads, power, pipes, airports",3.61,56.79,55.61,2.93,false],
+ ["ICOM","iShares Bloomberg Roll Select Commodity (Acc)","IE","LSE","Broad commodities: oil, metals, crops",40.38,53.8,67.39,0,true]
 ];
-var lfil="all",picks={};
+var lfil="core",picks={},CORE={"VT|US":1,"VWRA|IE":1,"SWDA|IE":1,"VOO|US":1,"CSPX|IE":1,"VTI|US":1,"ACWI|US":1,"ACWI|IE":1,"BND|US":1,"AGGG|IE":1,"ES3|SG":1};
 function ann(c,y){return c===null?null:(Math.pow(1+c/100,1/y)-1)*100}
 function per(c,y){return c===null?'':'<br><span class="small">'+pc(ann(c,y))+' / yr</span>'}
 function pc(v){if(v===null)return '<span class="small">no data</span>';return '<span style="color:'+(v<0?"var(--coral)":"inherit")+'">'+(v>0?"+":"")+v.toFixed(1)+'%</span>'}
@@ -493,7 +579,7 @@ function homeTag(h,job){return h==="US"?'<span class="tag red">US</span><br><spa
 function renderList(){
   var amt=+$("lamt").value;$("o_lamt").textContent=sg(amt);
   var q=($("lsearch").value||"").toLowerCase().trim();
-  var rows=LIST.filter(function(x){return (lfil==="all"||x[2]===lfil)&&(!q||(x[0]+" "+x[1]+" "+x[4]).toLowerCase().indexOf(q)>-1)});
+  var rows=LIST.filter(function(x){return q?((x[0]+" "+x[1]+" "+x[4]).toLowerCase().indexOf(q)>-1):(lfil==="all"||(lfil==="core"?CORE[x[0]+"|"+x[2]]:x[2]===lfil))});
   $("ltable").innerHTML='<tr><th>Pick</th><th>Fund</th><th>Home</th><th>Job</th><th>1 yr</th><th>3 yr<br><span class="small">(per year)</span></th><th>5 yr<br><span class="small">(per year)</span></th><th>Yield</th><th>US tax taken from dividends / year</th></tr>'+
   rows.map(function(x){
     var r1=x[5]===null,t;
@@ -501,10 +587,10 @@ function renderList(){
     else if(x[2]==="IE"&&x[4].indexOf("ETC")>-1)t='<span class="small">None. It holds metal and pays no dividends</span>';
     else if(x[2]==="IE")t='<span class="small">About 15% of US-stock dividends, taken inside the fund (already in the price)</span>';
     else t='<span class="small">None from the US. Singapore dividends are generally tax-free to you (confirm with IRAS)</span>';
-    return '<tr><td><input type="checkbox" data-i="'+LIST.indexOf(x)+'" '+(picks[LIST.indexOf(x)]?'checked':'')+' aria-label="Pick '+x[0]+'"></td><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+homeTag(x[2],x[4])+'</td><td>'+x[4]+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[5]))+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[6])+per(x[6],3)+'')+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[7])+per(x[7],5)+'')+'</td><td>'+(x[9]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+t+'</td></tr>';
+    return '<tr><td><input type="checkbox" data-i="'+LIST.indexOf(x)+'" '+(picks[LIST.indexOf(x)]?'checked':'')+' aria-label="Pick '+x[0]+'"></td><td><b>'+x[0]+'</b><br><span class="small">'+x[1]+'<br>'+x[3]+'</span></td><td>'+homeTag(x[2],x[4])+'</td><td>'+x[4]+'<span class="small eli"><i>'+eli(x)+'</i></span></td><td>'+(r1?'<span class="small">no data</span>':pc(x[5]))+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[6])+per(x[6],3)+'')+'</td><td>'+(r1?'<span class="small">no data</span>':pc(x[7])+per(x[7],5)+'')+'</td><td>'+(x[9]?'Acc<br><span class="small">pays none</span>':x[8].toFixed(2)+'%')+'</td><td>'+t+'</td></tr>';
   }).join("");
 }
-[["all","All 36"],["US","US-listed"],["IE","Irish UCITS"],["SG","Singapore"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="all")b.classList.add("on");$("lfilter").appendChild(b)});
+[["core","Broad & plain ("+LIST.filter(function(x){return CORE[x[0]+"|"+x[2]]}).length+")"],["all","All "+LIST.length],["US","US-listed"],["IE","Irish UCITS"],["SG","Singapore"]].forEach(function(f){var b=document.createElement("button");b.textContent=f[1];b.onclick=function(){lfil=f[0];[].forEach.call($("lfilter").children,function(c){c.classList.toggle("on",c===b)});renderList()};if(f[0]==="core")b.classList.add("on");$("lfilter").appendChild(b)});
 $("lamt").addEventListener("input",renderList);renderList();
 
 $("lsearch").addEventListener("input",renderList);
@@ -519,7 +605,7 @@ function pickSummary(){
   else if(n>=3)h+=" Good size.";
   else h+=" Even 1 or 2 broad funds can be enough.";
   if(dup.length)h+="<br><b style='color:var(--coral)'>Overlap:</b> "+dup.join("; ")+". Keep one.";
-  $("picksum").innerHTML=h;
+  h+=xray(ids);$("picksum").innerHTML=h;
 }
 /* TAX */
 function sgTax(){
@@ -556,11 +642,21 @@ var Q=[
  ["Which comes BEFORE investing?",["Paying off a 25% credit card","Buying a hot stock","Waiting for a crash"],0],
  ["Someone offers 'target returns of 15–20%' in a WhatsApp group…",["Great, join","Red flag. Check the MAS register and call the firm yourself","Tell friends"],1]
 ];
+Q.push(
+ ["A fund falls 50%. How much must it rise just to get back to where it started?",["50%","100%","25%"],1],
+ ["You own VOO, CSPX, VTI, QQQ and a 'tech' fund. Are you well spread?",["Yes, 5 funds is plenty","Probably not: they mostly own the same big US companies","Yes, they have different names"],1],
+ ["Fee of 0.2% vs 2% a year. Over 30 years the gap is…",["Tiny","Can eat a big chunk of your growth","Only matters for rich people"],1]
+);
+var WHY=["Singapore has no tax treaty with the US, so the default 30% applies to dividends on US-listed funds.","Above about US$60,000 of US assets, the US can tax the excess when a non-US person dies. I could not confirm a treaty change.","India taxes gains on Indian assets even if you live abroad. Tax is usually taken at sale (TDS).","A 25% credit card costs you 25% a year, guaranteed. Pay it first.","Check the MAS register and call the firm using a number you found yourself, not one from the chat."].concat([
+ "Lose half of $100 and you have $50. To get back to $100 you need +$50, which is +100% of what is left. Try the crash slider.",
+ "Different names do not mean different contents. Check the top holdings. Funds can overlap heavily.",
+ "The fee is charged every year on a growing pot, and what it takes can never grow for you. Try the fee caterpillar."
+]);
 var got=0,answered=0;
 $("quizbox").innerHTML=Q.map(function(q,qi){return '<div class="card" data-q="'+qi+'"><b>'+(qi+1)+'. '+q[0]+'</b>'+q[1].map(function(o,oi){return '<button data-o="'+oi+'">'+o+'</button>'}).join("")+'</div>'}).join("");
 $("quizbox").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;var card=b.parentNode;if(card.dataset.done)return;
-  var qi=+card.dataset.q,oi=+b.dataset.o;card.dataset.done=1;answered++;
+  var qi=+card.dataset.q,oi=+b.dataset.o;card.dataset.done=1;answered++;card.insertAdjacentHTML("beforeend",'<p class="small"><b>Why:</b> '+WHY[qi]+'</p>');
   if(oi===Q[qi][2]){b.classList.add("ok");got++}else{b.classList.add("no");card.querySelector('[data-o="'+Q[qi][2]+'"]').classList.add("ok")}
   $("score").textContent=got+" / "+answered+" right"+(answered===Q.length?(got===Q.length?" 🏆 Nailed it.":" · Flip back to what you missed."):"");
 });
@@ -585,6 +681,167 @@ var LINKS=[
  ["Endowus: tax on US-listed ETFs (broker article)","Same topic. Also written by a seller","https://endowus.com/insights/an-inconvenient-truth-tax-on-us-listed-etfs-04c7532c5d"]
 ];
 $("linkgrid").innerHTML=LINKS.map(function(l){return '<a href="'+l[2]+'" target="_blank" rel="noopener"><div class="card"><b>'+l[0]+' ↗</b><p class="small" style="margin:.3rem 0">'+l[1]+'</p><div class="u">'+l[2].replace(/^https?:\/\//,"").slice(0,60)+'…</div></div></a>'}).join("");
+
+/* ---- EXTRAS (fee caterpillar, crash practice, X-ray, quest, plan, words) ---- */
+var money=sg;
+function therm(v,max){var p=Math.min(100,v/max*100),c=p<70?"#6bb33a":p<100?"#e9b000":"#ff6b4a";return '<div class="therm"><i style="width:'+p+'%;background:'+c+'"></i></div>'}
+
+/* fee caterpillar */
+function feeCat(){
+  var s=+$("start").value,m=+$("mo").value,y=+$("yrs").value,put=s+m*12*y,best=fv(s,m,y,.06)[y];
+  var rows=[["Cheap index-style fund",0.2],["Typical managed fund",1.0],["Pricey fund",2.0]],h="";
+  if(best<=0){$("feebox").innerHTML='<span class="small">Move the start or monthly slider above first.</span>';return}
+  var g=best-put;
+  rows.forEach(function(r){
+    var v=fv(s,m,y,.06-r[1]/100)[y],ate=best-v;
+    h+='<div class="feerow"><b>'+r[0]+': '+r[1].toFixed(1)+'% a year</b><div class="feebar" role="img" aria-label="'+r[0]+' keeps '+Math.round(v/best*100)+' percent"><i style="width:'+(v/best*100)+'%"></i></div>'+
+       '<span class="small">Ends with <b>'+money(v)+'</b>. The fee ate '+money(ate)+(g>0?' ('+Math.round(ate/g*100)+'% of your growth)':'')+'.</span></div>';
+  });
+  h+='<p class="small">You put in '+money(put)+'. A fund with zero fees would end with '+money(best)+' in this made-up 6% world. The fee is charged every year, and what it takes can never grow for you again. Always look up the fee before you buy.</p>';
+  $("feebox").innerHTML=h;
+}
+["start","mo","yrs"].forEach(function(id){$(id).addEventListener("input",feeCat)});feeCat();
+
+/* crash practice */
+function crash(){
+  var p=+$("cpot").value,f=+$("cfall").value/100;
+  $("o_cpot").textContent=money(p);$("o_cfall").textContent=Math.round(f*100)+"%";
+  var left=p*(1-f),need=(1/(1-f)-1)*100,yrs=Math.log(1/(1-f))/Math.log(1.07);
+  $("crashout").innerHTML='<div class="stat"><span class="small">Your pot goes from '+money(p)+' to</span><b>'+money(left)+'</b><span class="small">that is '+money(p-left)+' down on paper</span></div>'+
+   '<p>To get back to '+money(p)+' you need a <b>+'+need.toFixed(0)+'%</b> gain. (Falling is easier than climbing: a 50% fall needs +100%.)</p>'+
+   '<p class="small">If it then grew a steady 7% a year (a made-up number), getting back would take about <b>'+yrs.toFixed(1)+' years</b>. Real recoveries can be quicker or much slower.</p>'+
+   '<p><b>Calm test:</b> what will you do? Write it in <a href="#plan">section 5d</a> before it happens.</p>';
+}
+["cpot","cfall"].forEach(function(id){$(id).addEventListener("input",crash)});crash();
+
+/* explain-like-I'm-10 for each fund */
+var ELI=[
+ [/singapore|sti\b/,"Owns Singapore's biggest companies: banks, property, phone firms."],
+ [/mining/,"Owns companies that dig copper out of the ground. That is not the same as owning copper itself."],
+ [/copper/,"Follows the price of copper, the metal in wires and pipes. Goes up and down with factories and building."],
+ [/platinum/,"A rare metal used in cars and factories. It pays you nothing while you hold it. Only its price moves."],
+ [/silver/,"Like gold's wild little cousin. It pays nothing and its price jumps around a lot more."],
+ [/gold/,"A shiny metal people have valued for thousands of years. It pays nothing. Only its price moves."],
+ [/oil|energy/,"Owns oil and gas companies. They do well when oil is pricey and struggle when it drops."],
+ [/korea/,"Owns companies from South Korea only. One country in one basket."],
+ [/japan/,"Owns companies from Japan only."],
+ [/commodit/,"A basket of raw stuff like oil, metals and crops. No company profits, just prices."],
+ [/bond/,"A bond is a loan to a government or company. You get interest back. Usually calmer than shares, but not risk-free."],
+ [/health/,"Owns medicine, hospital and health companies. People need them in good times and bad."],
+ [/food|staples|household/,"Owns companies that sell food and soap. People keep buying them even in bad times."],
+ [/propert|real estate|reit/,"Owns companies that own buildings like shops, offices and warehouses."],
+ [/emerging/,"Owns companies in fast-growing countries. More bumpy rides."],
+ [/infrastructure/,"Owns companies that run roads, power lines, pipes and airports."],
+ [/dividend/,"Owns companies that hand over a lot of their profit as cash."],
+ [/small/,"Owns smaller companies. They can grow fast but wobble more than the giants."],
+ [/concentrated|nasdaq-100/,"About 100 big, tech-heavy companies. Great when tech booms, painful when it doesn't."],
+ [/outside us|non-us|europe, japan/,"Owns companies from countries outside the US."],
+ [/whole market/,"Owns almost every US company, big and small."],
+ [/us large|s&p 500/,"Owns America's biggest companies. The S&P 500 is 500 of them."],
+ [/world|global|all-world|developed/,"A tiny slice of thousands of companies around the world, in one purchase."]
+];
+function eli(x){if(!ELI)return "";var t=(x[4]+" "+x[1]).toLowerCase();for(var i=0;i<ELI.length;i++){if(ELI[i][0].test(t))return ELI[i][1]}return ""}
+
+/* basket X-ray */
+function xray(ids){
+  var a1=[],a3=[],a5=[],us=0,other=0,low=null;
+  function avg(a){return a.length?a.reduce(function(p,c){return p+c},0)/a.length:null}
+  ids.forEach(function(k){var x=LIST[k];if(x[2]==="US")us++;else other++;
+    if(x[5]!==null){a1.push(x[5]);if(low===null||x[5]<low[1])low=[x[0],x[5]]}
+    if(x[6]!==null)a3.push(ann(x[6],3));if(x[7]!==null)a5.push(ann(x[7],5))});
+  if(!a1.length)return "";
+  function f(v){return v===null?"no data":(v>0?"+":"")+v.toFixed(1)+"%"}
+  return '<br><span class="small"><b>X-ray (equal amounts in each):</b> average 1 yr '+f(avg(a1))+', 3 yr '+f(avg(a3))+' a year, 5 yr '+f(avg(a5))+' a year. Weakest 1-yr: '+low[0]+' '+f(low[1])+'. '+us+' US-listed, '+other+' other. Rough, price only, as of 30 Oct 2026, and the past is not a forecast.</span>';
+}
+
+/* research quest */
+var QITEMS=[
+ "What does it actually own? Find the <b>top 10 holdings</b> and the countries.",
+ "What is the <b>yearly fee</b> (TER)? Write it as dollars per year on $1,000.",
+ "What was its <b>worst drop</b>? Set the chart to the longest period.",
+ "Who runs it, and is it based in the US or Ireland? Does that match the table?",
+ "Does it <b>pay income out or reinvest it</b> (distributing or accumulating)? What does that mean for tax where you live?",
+ "Can you explain it to a friend in <b>one sentence</b>? If not, skip it."
+];
+$("questbtn").onclick=function(){
+  var x=LIST[Math.floor(Math.random()*LIST.length)];
+  $("questout").hidden=false;
+  $("questout").innerHTML='<span class="tag">YOUR MYSTERY FUND</span><h3 style="margin-top:8px">'+x[0]+' · '+x[1]+'</h3><p class="small">Job: '+x[4]+'. <i>'+eli(x)+'</i></p>'+
+   '<p>Find its fact sheet: search the fund name plus "factsheet", and use the company that runs it (iShares, Vanguard, SPDR, Schwab, Invesco and so on). Tick each question as you answer it on paper.</p>'+
+   QITEMS.map(function(q,i){return '<label class="chk"><input type="checkbox" data-q="'+i+'"><span>'+(i+1)+'. '+q+'</span></label>'}).join("")+
+   '<p class="small" id="questmsg"></p>';
+};
+$("questout").addEventListener("change",function(e){
+  var c=e.target;if(!c.dataset||c.dataset.q===undefined)return;c.parentNode.classList.toggle("done",c.checked);
+  var n=$("questout").querySelectorAll("input:checked").length;
+  $("questmsg").textContent=n===QITEMS.length?"🎉 Quest done. That is more homework than most people ever do. Now press the button for another fund.":n+" of "+QITEMS.length+" answered.";
+});
+
+/* 5-line plan */
+var PKEY="sgin_plan",PF=["pl1","pl2","pl3","pl4","pl5"],plan={};
+try{plan=JSON.parse(store(PKEY)||"{}")||{}}catch(e){plan={}}
+PF.forEach(function(id){if(plan[id])$(id).value=plan[id]});
+function planRender(){
+  PF.forEach(function(id){plan[id]=$(id).value});store(PKEY,JSON.stringify(plan));
+  var names=Object.keys(picks).filter(function(k){return picks[k]}).map(function(k){return LIST[k][0]}).join(", ");
+  function v(id,d){return plan[id]&&String(plan[id]).trim()?plan[id]:d}
+  $("plout").value="MY INVESTING PLAN\n\n1. I am investing for: "+v("pl1","(not written yet)")+"\n2. I can leave it alone for: "+(plan.pl2?plan.pl2+" years":"(not written yet)")+"\n3. If it falls 20%, I will: "+v("pl3","(not written yet)")+"\n4. I review once a year on: "+v("pl4","(pick a date)")+"\n5. I would sell if: "+v("pl5","(not written yet)")+"\n\nMy shortlist (3 to 5 funds max): "+(names||"(not chosen yet)")+"\n\nEducation only, not advice. I checked the fees and fact sheets myself.";
+}
+PF.forEach(function(id){$(id).addEventListener("input",planRender)});
+$("ltable").addEventListener("change",planRender);planRender();
+$("plcopy").onclick=function(){
+  var t=$("plout"),ok=false;
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t.value);ok=true}}catch(e){}
+  if(!ok){try{t.select();ok=document.execCommand("copy")}catch(e){}}
+  $("plmsg").textContent=ok?"Copied.":"Could not copy. Select the text and copy it by hand.";
+};
+$("plprint").onclick=function(){document.body.classList.add("pp");try{window.print()}catch(e){}setTimeout(function(){document.body.classList.remove("pp")},500)};
+$("plclear").onclick=function(){PF.forEach(function(id){$(id).value=""});planRender();$("plmsg").textContent="Cleared."};
+
+/* money words */
+var WORDS=[
+ ["Share (stock)","A tiny piece of a company. If the company earns more, your piece can be worth more."],
+ ["ETF","A basket of many shares (or bonds) you buy in one go. It trades on a stock exchange like a single share."],
+ ["Index fund","A basket that simply copies a list, like 'the 500 biggest US companies'. Nobody is trying to pick winners."],
+ ["Fee (TER)","The yearly price of owning a fund, as a % of your money. 0.2% means $2 a year for every $1,000."],
+ ["Dividend","Cash a company pays its owners out of its profit."],
+ ["Yield","Dividends for a year as a % of the price. A 2% yield is about $20 a year on $1,000."],
+ ["Accumulating (Acc)","The fund keeps the dividends and buys more shares for you inside. You get no cash payments."],
+ ["Distributing (Dist)","The fund sends the dividends to you as cash."],
+ ["UCITS","A European rule-book for funds. Irish UCITS funds are what many people outside the US buy."],
+ ["ETC","Looks like an ETF but it is a different thing: a note that follows the price of a metal. Not a UCITS fund."],
+ ["Bond","A loan you make to a government or company. They pay you interest and give the money back later."],
+ ["Diversification","Don't keep all your eggs in one basket. Own many different things so one flop doesn't sink you."],
+ ["Compounding","Earning returns on your earlier returns. Like a snowball rolling downhill."],
+ ["Inflation","Prices creeping up. $100 buys less each year, so cash sitting still slowly shrinks."],
+ ["Dollar-cost averaging","Investing the same amount on a schedule, like monthly, whatever the price is."],
+ ["Rebalancing","Nudging your mix back to plan. The gentle way: put new money into the piece that shrank."],
+ ["Drawdown","How far something has fallen from its high point. A -30% drawdown means 30% down from the top."],
+ ["Volatility","How bumpy the ride is. High means big ups and downs."],
+ ["Withholding tax","Tax taken out of a dividend before it reaches you, by the country the company is in."],
+ ["Tax resident","Someone who lives in Singapore 183 days or more in a year (the quick rule used on this page). It changes which rules apply."],
+ ["CPF","Singapore's compulsory savings for citizens and PRs. Employment Pass holders usually are not in it."],
+ ["NRI","Non-Resident Indian. An Indian citizen living abroad."],
+ ["NRE / NRO","Two kinds of NRI bank account in India. They have different rules for tax and moving money. Ask the bank."],
+ ["TDS","Tax Deducted at Source. The fund house takes the tax before paying you."],
+ ["Tax treaty (DTAA)","An agreement between two countries to stop the same income being taxed twice. Singapore has none with the US. Check how the India-Singapore one applies to you."],
+ ["US death tax","A US tax that can hit people from other countries on US assets they own when they die, above about US$60,000. It is why some people pick Irish funds."],
+ ["30% US dividend tax","With no tax treaty, the US takes 30% of dividends paid to people in Singapore. Irish funds take about 15% inside the fund."]
+];
+function renderWords(){
+  var q=($("wsearch").value||"").toLowerCase().trim();
+  $("wordgrid").innerHTML=WORDS.filter(function(w){return !q||(w[0]+" "+w[1]).toLowerCase().indexOf(q)>-1}).map(function(w){return '<div class="card"><h3>'+w[0]+'</h3><p style="margin:0">'+w[1]+'</p></div>'}).join("")||'<p class="small">No match. Try another word.</p>';
+}
+$("wsearch").addEventListener("input",renderWords);renderWords();renderList();
+
+/* US death-tax gauge */
+function us60(){
+  var v=+$("us60").value||0;
+  $("us60out").innerHTML=therm(v,60000)+'<span class="small">US$'+Math.round(v).toLocaleString("en-US")+' of US$60,000 ('+Math.round(v/600)+'%)</span>'+
+    (v>=60000?'<p><span class="tag red">Over the line</span> The US could tax the excess. Ask a specialist, and look at Irish-listed alternatives.</p>':v>=42000?'<p><span class="tag amber">Getting close</span> Watch this number as you add money.</p>':'<p><span class="tag green">Well under</span> Keep an eye on it as the pot grows.</p>');
+}
+$("us60").addEventListener("input",us60);us60();
+
 })();
 </script>
 </body>
