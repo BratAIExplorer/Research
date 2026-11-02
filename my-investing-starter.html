@@ -109,7 +109,7 @@ textarea.t{min-height:210px;resize:vertical;font-family:ui-monospace,Menlo,Conso
   <h1>Ringgit Money Starter:<br>small steps, <em>your own homework</em>.</h1>
   <p>Your money touches three rulebooks: Malaysia's (EPF and tax), the US's (which can bite if you buy US funds), and your own plan. This page explains them in plain words, shows real fund numbers, and tells you where to check everything yourself. No hype. No "guaranteed returns".</p>
   <p><button class="big" onclick="document.getElementById('steps').scrollIntoView()">Start with the 7 baby steps ↓</button></p>
-<p style="margin-top:6px"><span class="tag green">Play with money maths</span> <span class="tag">Explore 43 real funds</span> <span class="tag amber">Do a research quest</span> <span class="tag red">Write your own 5-line plan</span></p>
+<p style="margin-top:6px"><span class="tag green">Play with money maths</span> <span class="tag">Explore 45 real funds</span> <span class="tag amber">Do a research quest</span> <span class="tag red">Write your own 5-line plan</span></p>
 </div></header>
 
 <nav class="chips"><div class="wrap">
@@ -252,7 +252,7 @@ textarea.t{min-height:210px;resize:vertical;font-family:ui-monospace,Menlo,Conso
   </table></div>
   <div class="note"><b>Honest gap:</b> I have no return numbers for Malaysian unit trusts, and I did not find a verified average sales charge or fee for them. "Usually cheaper" and "many have a sales charge" are general statements, not Malaysian data. Compare the exact funds on their fact sheets. I am assuming US mutual funds are hard for a Malaysian to buy, so I list US <i>ETFs</i> instead, which do a similar job.</div>
 
-  <h3 style="margin-top:26px">The real list: 43 funds, not just tech</h3>
+  <h3 style="margin-top:26px">The real list: 45 funds, not just tech</h3>
   <p class="lead">Data from Interactive Brokers, around 30 Oct 2026. A <b>menu to explore, not a shopping list</b>. It spans the whole world, health care, everyday goods, smaller companies, property, gold, silver and bonds, in US and Irish versions. It also has 4 Bursa Malaysia ETFs, but I have <b>no return numbers</b> for those. Broad index funds already hold a lot of big tech, so check each fund's top holdings.</p>
   <div class="grid g2">
     <label class="row"><span>Amount in each fund (RM) <output id="o_lamt"></output></span><input type="range" id="lamt" min="1000" max="100000" step="1000" value="10000"></label>
@@ -277,6 +277,7 @@ textarea.t{min-height:210px;resize:vertical;font-family:ui-monospace,Menlo,Conso
       <li><b>One-country funds</b> (Japan, Korea) are riskier than whole-world funds. "Global" = VT, VWRA, ACWI and the SPDR ACWI fund above.</li>
       <li><b>Filter note:</b> "Broad &amp; plain" is only a starting view of wide, single-job funds. It is not a recommendation. Press "All" or use the search box to see everything.</li>
       <li><b>Newest rows (VHYA, SCHD, IGF, ICOM):</b> numbers from IBKR, same date. I <b>assume</b> VHYA and ICOM are accumulating (they show 0% yield; confirm on the fact sheet). I understand ICOM holds commodity futures through swaps, not companies. Check the top holdings of SCHD and IGF yourself.</li>
+      <li><b>COPX is two different funds:</b> an Irish UCITS (accumulating, 0.55% fee, launched Nov 2021 so no 5-year figure) and a US-listed fund (0.65% fee, pays out twice a year). Same ticker, different funds. Returns are from IBKR, same date. justETF showed lower UCITS figures (about +24% over 1 year) that I could not reconcile, because it gave no date and may use euros. Miners swing harder than copper itself. WisdomTree's COPA/COPB copper ETC is swap-backed (0.49% fee plus a 0.45% swap rate); I have no returns for it.</li>
       <li><b>Spread ≠ safe.</b> Holding different things helps, but in a crash many things fall together. Property (VNQ) did only +7% over 5 years here.</li>
       <li>Past results are not a forecast.</li>
     </ul></div>
@@ -586,7 +587,9 @@ var LIST=[
  ["FBMKLCI-EA","FBM KLCI ETF","MY","Bursa","Malaysia's 30 biggest companies",null,null,null,null,false],
  ["GOLDETF","TradePlus Shariah Gold Tracker (code also shown as 0828EA)","MY","Bursa","Gold (physically backed, Shariah-compliant)",null,null,null,null,false],
  ["DJIM25-EA","DJIM Malaysia Titans 25 (Shariah-compliant)","MY","Bursa","Malaysia's big Shariah-compliant companies",null,null,null,null,false],
- ["CHINEXT-EA","TradePlus S&P New China Tracker","MY","Bursa","China new-economy companies (trades in MYR or USD)",null,null,null,null,false]
+ ["CHINEXT-EA","TradePlus S&P New China Tracker","MY","Bursa","China new-economy companies (trades in MYR or USD)",null,null,null,null,false],
+ ["COPX","Global X Copper Miners UCITS (Acc)","IE","LSE (USD)","Copper mining companies (UCITS, young fund)",45.94,147.1,null,0,true],
+ ["COPX","Global X Copper Miners (US-listed)","US","NYSE Arca","Copper mining companies",45.87,146.27,178.23,2.68,false]
 ];
 var lfil="core",picks={},CORE={"VT|US":1,"VWRA|IE":1,"SWDA|IE":1,"VOO|US":1,"CSPX|IE":1,"VTI|US":1,"ACWI|US":1,"ACWI|IE":1,"BND|US":1,"AGGG|IE":1,"FBMKLCI-EA|MY":1};
 function ann(c,y){return c===null?null:(Math.pow(1+c/100,1/y)-1)*100}
