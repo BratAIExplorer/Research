@@ -304,3 +304,38 @@ Same rules and sources as section 10 (GAAP diluted EPS and share counts from SEC
 | **ACHR** | Speculative Watch (unchanged from the penny-stock chat), weakest of the group | Fails every CANSLIM test. The earlier view rested on cash runway ($1.56B at Q2), not on earnings. Q3 date still unconfirmed |
 
 **Not checked:** institutional ownership and trend (I), ROE, float and short interest, market breadth, why GLW, VRT and EME fell so far, revenue and debt for CRWV, Centrus Q3 numbers (not out yet), and whether Vertiv's earlier "reported 28 Oct" Q3 EPS includes one-offs.
+
+---
+
+## 12. CANSLIM pass on NOK, CRDO, FTNT, GRAB, KLAC, PWR, SNPS, NXPI, XYZ (4 Nov 2026)
+
+Same rules as section 10. **Assumptions:** "klaa" = KLA Corp (KLAC); "xyz" = Block Inc (NYSE: XYZ); "NOK" = Nokia ADR (NYSE); "CREDO" = Credo Technology (CRDO). Prices are IBKR realtime ~16:00 UTC 4 Nov. 1-year change vs SPY (+14.4%). I (institutions) not checked for any.
+
+| Ticker | Price | vs 52w high | C: latest qtr EPS (vs yr ago) | A: annual EPS | N | S: diluted shares | L: 1y vs SPY | I | M | Green of 6 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **FTNT** | $128.57 | -34.8% | 🟢 Q3 $0.86 vs $0.62 (+39%) | 🔴 FY25 $2.42 vs $2.26 (+7%) | 🔴 | 🟢 -2.4% | 🟢 +49% | ⚪ | 🟢 | **4** |
+| **KLAC** | $150.88 | -50.9% | 🟢 Sep qtr $1.18 vs $0.85 (+39%) | 🟡 FY26 $3.66 vs $3.04 (+20%) | 🔴 | 🟢 -1.0% | 🟢 +26% | ⚪ | 🟢 | **4** |
+| **PWR** | $570.49 | -27.7% | 🟢 Q3 $4.55 vs $2.24 (+103%) | 🟡 FY25 $6.80 vs $6.03 (+13%) | 🔴 | 🟢 +0.8% | 🟢 +30% | ⚪ | 🟢 | **4** |
+| **NXPI** | $262.49 | -22.5% | 🟢 Q3 $3.48 vs $2.48 (+40%) | 🔴 FY25 $7.95 vs $9.73 (-18%) | 🟡 | 🟢 -0.2% | 🟢 +28% | ⚪ | 🟢 | **4** |
+| **CRDO** | $133.32 | -56.8% | 🟢 FQ1 $0.67 vs $0.34 (+97%). **But down from $0.91 last quarter** (my calc: FY26 $2.51 minus first three quarters) | 🟢 FY26 $2.51 vs $0.29 | 🔴 | 🟡 +5.3% | 🔴 -22% | ⚪ | 🟢 | **3** |
+| **XYZ** (Block) | $86.78 | at its 52-week high | 🟡 Q3 $0.92 vs $0.74 (+24%) | 🔴 FY25 $2.10 vs $4.56 (-54%); Q1 2026 was a loss (-$0.52) | 🟢 | 🟢 -1.1% | 🟡 +19% | ⚪ | 🟢 | **3** |
+| **SNPS** | $457.56 | -15.2% | 🟢 May-Jul qtr $2.84 vs $1.50 (+89%), but the prior two quarters were $0.34 and $0.09 (Ansys deal costs), so very lumpy | 🔴 FY25 $8.04 vs $14.51 (-45%); FY26 not finished | 🟡 | 🔴 +19% (Ansys deal) | 🟡 +5% | ⚪ | 🟢 | **2** |
+| **NOK** (ADR) | $8.28 | -52.3% | 🟡 Comparable EPS €0.09 vs €0.06 (+50%), but **reported EPS only €0.03** (restructuring costs) | ⚪ not pulled (IFRS filer) | 🔴 | ⚪ | 🟡 +21% | ⚪ | 🟢 | **1** |
+| **GRAB** | $3.34 | -46.4% | 🔴 Q3 profit $18M vs $17M (+6%). Per-share figure not found | ⚪ not pulled (foreign filer) | 🔴 | ⚪ | 🔴 -40% | ⚪ | 🟢 | **1** |
+
+**Verdict:** none passes CANSLIM. Only XYZ is at a 52-week high, but its annual EPS fell 54% and last quarter's growth is just under the 25% bar. FTNT, KLAC, PWR and NXPI have strong recent earnings and beat the market over a year, but all sit 22 to 51% below their highs.
+
+**Labels (watch-only, my opinion, low confidence):**
+| Ticker | Label | Why / what would change it |
+|---|---|---|
+| **PWR** | Speculative Watch | Q3 EPS doubled, share count flat, beating the market. 28% off its high |
+| **KLAC** | Speculative Watch | Q EPS +39%, buybacks shrinking shares, but 51% off the high (cause unchecked). Prices and EPS here are after what looks like a 10-for-1 split; IBKR price and SEC EPS agree on that basis, but the share-count table was inconsistent in the source |
+| **NXPI** | Speculative Watch | Q3 EPS +40%, but annual EPS fell 18% and price is 22% off the high |
+| **FTNT** | Speculative Watch | Q3 EPS +39%, strongest price vs market, but annual EPS only +7% and 35% off the high |
+| **CRDO** | Speculative Watch | Earnings strong year on year, but EPS fell last quarter and the stock is 57% off the high and lagging the market. Cause not checked |
+| **XYZ** | Wait | At a 52-week high, but profit history is erratic (loss in Q1). Q3 was reported 3 Nov; price reaction not checked |
+| **SNPS** | Wait | Share count +19% from the Ansys deal and quarterly EPS swinging wildly. Next report (fiscal Q4) likely December, date not confirmed |
+| **NOK** | Wait | Comparable profit is growing, but reported EPS is a third of it. Down 52% from the high. FCF conversion guide was lowered |
+| **GRAB** | Wait | Revenue +27%, adjusted EBITDA record, $400M buyback underway (CFO comment, unverified), but profit is flat and the price is down 40% over a year |
+
+**Not checked:** I (institutional ownership), ROE, float and short interest, market breadth, why KLAC, CRDO and NOK fell so far from their highs, NOK and GRAB annual EPS and share counts (foreign filers, no SEC XBRL), GRAB's per-share Q3 figure, and the exact date of Grab's Q3 filing. EPS is GAAP, so one-offs distort it. NOK's comparable figures are the company's own adjusted numbers.
