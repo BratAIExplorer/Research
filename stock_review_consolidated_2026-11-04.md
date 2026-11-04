@@ -275,3 +275,32 @@ Outside India, most of the combined list is in a downtrend (29 of 44 FAIL on the
 **Not checked, so these scores are partial:** I (institutional ownership and trend), ROE, float and short interest, market breadth and distribution days, ASND annual EPS and share count (IFRS filer, SEC XBRL not usable), HNST, TLS and RKT share counts. EPS figures are GAAP, so one-offs flatter or hurt them (flagged where found). The EPS source tables list restated numbers where a split applied (NVDA 10-for-1).
 
 **Changes vs section 1 and 7:** the N rule here is stricter than the earlier traffic-light grid, and L uses a 1-year comparison to SPY, which the earlier grid never did. NVDA's earlier "Quality Watch (provisional)" is now plain Watch because it fails L.
+
+---
+
+## 11. CANSLIM pass on CoreWeave, Vertiv, Centrus, EMCOR, Archer, Corning (4 Nov 2026)
+
+Same rules and sources as section 10 (GAAP diluted EPS and share counts from SEC XBRL, IBKR realtime prices ~15:57 UTC 4 Nov, SPY +14.4% over 1 year, M green). I (institutions) was not checked for any.
+
+| Ticker | Price | vs 52w high | C: latest qtr EPS (vs yr ago) | A: annual EPS | N | S: diluted shares | L: 1y vs SPY | I | M | Green of 6 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **GLW** Corning | $117.14 | -56.8% (fell 34% from its 13-week high) | 🟢 Q3 $0.78 vs $0.50 (+56%) | 🟢 FY25 $1.83 vs $0.58 | 🔴 | 🟢 +0.3% | 🟢 +38% | ⚪ | 🟢 | **5** |
+| **VRT** Vertiv | $207.29 | -45.4% | 🟢 Q3 $1.95 vs $1.02 (+91%) | 🟢 FY25 $3.41 vs $1.28 | 🔴 | 🟢 +0.4% | 🟡 +13% (1 point behind SPY) | ⚪ | 🟢 | **4** |
+| **EME** EMCOR | $634.67 | -33.3% (at its 13-week low) | 🟢 Q3 $9.04 vs $6.57 (+38%) | 🟢 FY25 $28.19 vs $21.52 | 🔴 | 🟢 -1.6% | 🔴 -4% | ⚪ | 🟢 | **4** |
+| **LEU** Centrus | $90.63 | -73.8% (below its 52-week low of $94.50) | 🔴 Q2 $0.77 vs $1.59 (-52%). **Q3 releases today after close** | 🔴 FY25 $3.90 vs $4.47 | 🔴 | 🔴 +21% | 🔴 -71% | ⚪ | 🟢 | **1** |
+| **CRWV** CoreWeave | $48.91 | -64.6% (below its 52-week low of $49.46) | 🔴 Q2 -$1.14 vs -$0.60 (loss widened) | 🔴 FY25 -$2.81 (loss, narrowing from -$4.30) | 🔴 | 🔴 +13% | 🔴 -59% | ⚪ | 🟢 | **1** |
+| **ACHR** Archer | $4.125 | -58.1% (near its 52-week low) | 🔴 Q2 -$0.34 vs -$0.36 (still losing money) | 🔴 FY25 -$0.99 (loss, narrowing from -$1.42) | 🔴 | 🔴 +35% | 🔴 -59% | ⚪ | 🟢 | **1** |
+
+**Verdict:** none passes CANSLIM. Corning, Vertiv and EMCOR have excellent earnings and steady share counts, but all three are far below their highs. CoreWeave, Centrus and Archer fail almost every test: losses or falling profit, heavy share dilution, and prices at or near 52-week lows.
+
+**Labels (watch-only, my opinion, low confidence):**
+| Ticker | Label | Why / what would change it |
+|---|---|---|
+| **GLW** | Speculative Watch | Best earnings of the six, share count flat. The 57% drop from the high is unexplained (not checked). Upgrade if it rebuilds a base near highs |
+| **VRT** | Speculative Watch | Earnings +91%, but 45% off the high. Part of the AI data-center cluster that fell together |
+| **EME** | Speculative Watch | Earnings +38%, buybacks shrinking shares, but down 33% and lagging the market. Hitting its 13-week low |
+| **LEU** | Wait | Price below 52-week low, last filed quarter's profit halved, shares +21%. **Wait for tonight's Q3 report** (call 5 Nov 8:30 ET) |
+| **CRWV** | Avoid (on CANSLIM tests only) | Losing money, losses widened, shares +13%, price below its 52-week low. Q3 date not found. Debt not checked here, and a search headline citing $10.3B was not verified |
+| **ACHR** | Speculative Watch (unchanged from the penny-stock chat), weakest of the group | Fails every CANSLIM test. The earlier view rested on cash runway ($1.56B at Q2), not on earnings. Q3 date still unconfirmed |
+
+**Not checked:** institutional ownership and trend (I), ROE, float and short interest, market breadth, why GLW, VRT and EME fell so far, revenue and debt for CRWV, Centrus Q3 numbers (not out yet), and whether Vertiv's earlier "reported 28 Oct" Q3 EPS includes one-offs.
