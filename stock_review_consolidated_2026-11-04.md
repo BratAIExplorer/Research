@@ -227,3 +227,51 @@ Also updated in that chat (from search summaries):
 ## Biggest overall pattern
 
 Outside India, most of the combined list is in a downtrend (29 of 44 FAIL on the 200-day gate). Strong results are not lifting prices (MU, VRT, CAT, MTSI, COHR). Many AI-linked names are one correlated bet. Near-term event risk: JOBY 4 Nov, HNST 5 Nov, MTSI about 5 to 6 Nov, TLS/ACHR/EQX 9 Nov, RCAT 16 Nov, NVDA 17 Nov, PONY 18 Nov.
+
+---
+
+## 10. Real CANSLIM pass on the 10 trend-gate names (run 4 Nov 2026, after the first version of this file)
+
+**How it was scored (my rules, not a licensed screener):**
+- **C** = latest quarter GAAP diluted EPS vs same quarter last year. Green ≥ +25%, yellow +10 to 25%, red below, or loss-to-profit swing flagged "n/m".
+- **A** = last full-year GAAP EPS vs the year before. Green ≥ +25%.
+- **N** = distance below 52-week high. Green within 15%, yellow 15 to 25%, red over 25%.
+- **S** = diluted share count vs year ago. Green ≤ +2%, yellow +2 to 10%, red over +10%.
+- **L** = 1-year price change vs SPY (+14.4%). Green if ahead by more than 10 points, red if behind by more than 10.
+- **I** = not checked for anyone (no ownership data pulled).
+- **M** = SPY $765.64, 2.0% below its 52-week high, +14.4% over 1 year, +1% over 1 month. Uptrend intact. Breadth and distribution days not checked.
+
+**Sources:** EPS and share counts = SEC XBRL filings (reported, GAAP diluted). Prices = IBKR realtime, 4 Nov ~15:55 UTC. 1-year change = my calculation from IBKR's "price 52 weeks ago". MU Q4 EPS ($33.0) = my calculation: FY $74.33 minus the first three quarters.
+
+| Ticker | Price | vs 52w high | C: latest qtr EPS (vs yr ago) | A: annual EPS | N | S: diluted shares | L: 1y vs SPY | I | M | Green of 6 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **MU** | $803.73 | -35.9% (below 13-week low $827) | 🟢 $33.0 vs $2.83 (derived) | 🟢 FY26 $74.33 vs $7.59 | 🔴 | 🟢 +1.8% | 🟢 +262% | ⚪ | 🟢 | **5** |
+| **AMD** | $482.45 | -26.7% | 🟢 $1.46 vs $0.75 (+95%) | 🟢 FY25 $2.65 vs $1.00 | 🔴 | 🟢 +1.2% | 🟢 +93% | ⚪ | 🟢 | **5** |
+| **NVDA** | $202.61 | -16.7% | 🟢 $2.46 vs $1.08 (+128%), qtr ended 26 Jul | 🟢 FY26 $4.90 vs $2.94 | 🟡 | 🟢 -1.0% | 🔴 -0.1% | ⚪ | 🟢 | **4** |
+| **PLTR** | $174.34 | -18.1% | 🟢 $0.44 vs $0.18 (+144%) | 🟢 FY25 $0.63 vs $0.19 | 🟡 | 🟢 +0.1% | 🔴 -9% | ⚪ | 🟢 | **4** |
+| **RGLD** | $243.49 | -20.2% (52w), -10.3% (13w) | 🟢 $2.78 vs $2.01 (+38%), Q2 | 🟢 FY25 $6.69 vs $5.04 | 🟡 | 🔴 +29% (Sandstorm deal) | 🟢 +43% | ⚪ | 🟢 | **4** |
+| **PNFP** | $104.48 | -5.3% | 🔴 $2.40 vs $2.19 (+10%), shares doubled by merger | 🟢 FY25 $8.07 vs $5.96 (pre-merger) | 🟢 | 🔴 +96% | 🟡 +24% | ⚪ | 🟢 | **3** |
+| **ASND** | $251.09 | -11.0% | 🟡 Q2 profit €207M vs €39M loss, but €158M is a one-off voucher sale | ⚪ not pulled (IFRS filer) | 🟢 | ⚪ | 🟢 +25% | ⚪ | 🟢 | **3** |
+| **HNST** | $4.675 | -22.2% | 🟡 $0.09 vs $0.03, helped by tariff refunds (underlying net income $5.1M vs $10.7M reported) | 🔴 FY25 -$0.14 vs -$0.06 (loss) | 🟡 | ⚪ | 🟢 +43% | ⚪ | 🟢 | **2** |
+| **TLS** (Telos) | $5.29 | -36.7% | 🟡 $0.01 vs -$0.13 (loss to tiny profit) | 🔴 FY25 -$0.50 (loss, narrowing) | 🔴 | ⚪ | 🔴 -20% | ⚪ | 🟢 | **1** |
+| **RKT** | $14.78 | -39.3% | 🟡 $0.25 vs -$0.06 (loss to profit) | 🔴 FY25 -$0.05 vs $0.21 | 🔴 | ⚪ (inflated by Mr. Cooper deal per earlier chat) | 🔴 -11% | ⚪ | 🟢 | **1** |
+
+**Verdict:** no name passes C, A, N and L together. Strong earnings (C, A) are everywhere in the semis, but N and L fail: the stocks are well below their highs and, for NVDA and PLTR, flat or down over a year while the market is up 14%. CANSLIM says wait for a rebuilt base near highs.
+
+**Labels (watch-only, my opinion, all low to medium confidence):**
+| Ticker | Label | Why / what would change it |
+|---|---|---|
+| **RGLD** | Watch | Closest to passing: C, A, L green, N only 10% off 13-week high. Share count +29% is the weak spot. **Q3 reports 4 Nov after close**, wait for it |
+| **NVDA** | Watch | C and A are excellent, but a 1-year price of zero vs the market fails L. Latest quarter is from July; Q3 due 17 Nov |
+| **PNFP** | Watch | Near highs and ahead of the market, but EPS growth is only +10% and the share count doubled with Synovus. Credit quality still unchecked |
+| **MU** | Speculative Watch | Perfect earnings, but 36% off the high and below its 13-week low. Peak-cycle risk |
+| **AMD** | Speculative Watch | Earnings strong, price 27% off the high, valuation high (see section 7) |
+| **PLTR** | Speculative Watch | Earnings strong, price lagging the market, valuation very high |
+| **ASND** | Speculative Watch | Near highs, but the Q2 profit is mostly a one-off voucher sale. Annual EPS not checked |
+| **HNST** | Wait | Reported revenue -10.9%, profit helped by tariff refunds. **Reports 5 Nov** |
+| **TLS** | Wait | Loss-making on a full-year basis, 37% off its high. Q3 date not found |
+| **RKT** | Wait | Annual EPS fell, deal-inflated share count, 39% off its high |
+
+**Not checked, so these scores are partial:** I (institutional ownership and trend), ROE, float and short interest, market breadth and distribution days, ASND annual EPS and share count (IFRS filer, SEC XBRL not usable), HNST, TLS and RKT share counts. EPS figures are GAAP, so one-offs flatter or hurt them (flagged where found). The EPS source tables list restated numbers where a split applied (NVDA 10-for-1).
+
+**Changes vs section 1 and 7:** the N rule here is stricter than the earlier traffic-light grid, and L uses a 1-year comparison to SPY, which the earlier grid never did. NVDA's earlier "Quality Watch (provisional)" is now plain Watch because it fails L.
