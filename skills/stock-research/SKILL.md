@@ -3,7 +3,7 @@ name: "stock-research"
 description: "Four stock-research modes for Bharat: EARNINGS (pre-earnings brief for one ticker), RISK (risk check of his own portfolio), SCREEN (shortlist from his criteria), COMPETE (sector/competitor landscape). Use when he says 'earnings brief', 'risk check my portfolio', 'screen for stocks', or 'compare competitors in [sector]'. For a plain 'research X' or 'review this stock', use stock-review-master instead."
 ---
 
-# Stock Research (v1.2, 2026-11-04)
+# Stock Research (v1.3, 2026-11-04)
 
 One skill, four modes. Personal investing only. Not for Fortress product work.
 
@@ -63,9 +63,16 @@ Output, in this order:
 
 Compute, do not guess. Pull daily price history and calculate with Python (use `python -I` on downloaded data). If history is missing for a holding, mark that holding "NO DATA" and exclude it from the stats, saying so.
 
+Data loading (v1.3):
+- Prefer loading prices by script from a data API (Alpha Vantage, FMP or similar, key kept in the environment's secrets, never in chat). Check the host is reachable first. Do not rely on `yfinance`: it is unofficial and was rate-limited (HTTP 429) in a test.
+- IBKR price history comes back as text. If numbers must be copied by hand, copy only the largest holdings (enough to cover about 70 to 80% of portfolio value), and say how many lines were left out and why. Never hand-copy a multi-year history: mark the stress replay "NO DATA" instead.
+- Align by date across exchanges (UK, US, EU holidays differ): keep only days present in every series.
+- Convert everything to one currency with a pulled, dated FX rate. No FX rate = weights are only "share of the subset" and must be labelled that way. Never use a remembered FX rate.
+- The last bar of today may be partial and some exchanges are delayed (e.g. 15 minutes). Say so.
+
 Output:
 1. **Decision summary (top):** the top 3 risks and the one change that cuts the most risk.
-2. Correlation between holdings (matrix or the top 5 most-correlated pairs).
+2. Correlation between holdings (matrix or the top 5 most-correlated pairs). Also show each holding's **share of risk** next to its weight. Share of risk = how much of the portfolio's day-to-day swing that holding causes (its weight x how much it moves with the whole portfolio). A small holding can carry a big share. Say so in one plain sentence.
 3. Sector, geography and currency exposure (% of portfolio).
 4. Position sizing: any holding over ~20% or any tiny position that does not matter. Say the threshold is a rule of thumb, not a law.
 5. Interest-rate sensitivity per position (qualitative unless duration/beta data exists).
@@ -96,10 +103,10 @@ Output:
 
 Output:
 1. **Decision summary (top):** which company looks strongest in this group (labelled opinion) and the biggest risk to that view. Not "Buy".
-2. Top 5 to 7 players: market cap with date.
+2. Top 5 to 7 players: market cap with date = live price (IBKR snapshot, dated) x shares outstanding (latest filing, dated, say whether basic or diluted). If either piece is missing, write "NO DATA". Do not take a market cap from a source that shows no date.
 3. SWOT for the top 2 only.
 4. Market share trend, last 3 years. No reliable source = "NO DATA".
-5. Revenue and margin comparison (table, same period for every company, say which period).
+5. Revenue and margin comparison (table, same period for every company, say which period). Show GAAP and non-GAAP operating margin in separate columns and never mix them in one column. Non-GAAP leaves out stock-based pay, so say that. If a company's basis is missing, write "NO DATA" in that cell. Also show free cash flow as % of revenue, with the period.
 6. Moat per company: brand, cost, switching costs, network effects. Evidence, not adjectives.
 7. Management: capital allocation track record (buybacks executed, M&A outcomes, dilution).
 8. Innovation: R&D spend as % of revenue where reported.
@@ -109,6 +116,7 @@ Output:
 ---
 
 ## Version history
+v1.3 (2026-11-04): from the first RISK/SCREEN/COMPETE test. RISK: data loading rules (API by script, hand-copy limit, date alignment across exchanges, FX conversion, partial last bar), "share of risk" shown beside weight. COMPETE: market cap must be price x shares with dates; GAAP and non-GAAP margins in separate columns; FCF % of revenue added. SCREEN hard-stop confirmed working.
 v1.2 (2026-11-04): EARNINGS ETF/fund check added (ETFs have no earnings: mark N/A and continue). Found when WARP was in a batch run.
 v1.1 (2026-11-04): EARNINGS Step 0 added (check if the quarter was already reported; recap instead of preview) and IBKR-failure fallback. Found in a dry-run on AXTI.
 v1.0 (2026-11-04): first version. Merges four prompt templates (earnings, risk, screener, competitive landscape) into one skill. Replaced "buy/sell" and entry/stop-loss outputs with watch-only language to match stock-review-master. Added shared no-data rule and read-only brokerage rule.
