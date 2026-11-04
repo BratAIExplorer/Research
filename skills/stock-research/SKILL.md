@@ -3,7 +3,7 @@ name: "stock-research"
 description: "Four stock-research modes for Bharat: EARNINGS (pre-earnings brief for one ticker), RISK (risk check of his own portfolio), SCREEN (shortlist from his criteria), COMPETE (sector/competitor landscape). Use when he says 'earnings brief', 'risk check my portfolio', 'screen for stocks', or 'compare competitors in [sector]'. For a plain 'research X' or 'review this stock', use stock-review-master instead."
 ---
 
-# Stock Research (v1.1, 2026-11-04)
+# Stock Research (v1.2, 2026-11-04)
 
 One skill, four modes. Personal investing only. Not for Fortress product work.
 
@@ -37,6 +37,8 @@ If unclear, ask one short question. Do not guess the mode.
 ## Mode 1: EARNINGS
 
 **Needs:** one ticker and exchange. If the ticker could mean two listings, stop and ask. Confirm the next earnings date from the company or IBKR; if none found, say so.
+
+**ETF / fund check (before anything else):** if the ticker is an ETF or fund, it has no earnings. Say so in one line, mark that row "N/A, ETF", and continue with the other tickers. Offer a holdings view via `stock-review-master` instead. Never invent earnings for a fund.
 
 **Step 0 (always first): has this quarter already been reported?** Check the company's investor-relations page or latest 8-K for the most recent results date.
 - If the quarter was already reported: say so in line one. Give a short RECAP instead (actual vs estimate, guidance, call takeaways, price reaction) and the next earnings date (or "NO DATA"). Do not write a preview of a quarter that is over. Lean stays Wait / Watch / Avoid.
@@ -107,5 +109,6 @@ Output:
 ---
 
 ## Version history
+v1.2 (2026-11-04): EARNINGS ETF/fund check added (ETFs have no earnings: mark N/A and continue). Found when WARP was in a batch run.
 v1.1 (2026-11-04): EARNINGS Step 0 added (check if the quarter was already reported; recap instead of preview) and IBKR-failure fallback. Found in a dry-run on AXTI.
 v1.0 (2026-11-04): first version. Merges four prompt templates (earnings, risk, screener, competitive landscape) into one skill. Replaced "buy/sell" and entry/stop-loss outputs with watch-only language to match stock-review-master. Added shared no-data rule and read-only brokerage rule.
