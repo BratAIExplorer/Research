@@ -70,11 +70,11 @@ These had only a traffic-light checklist from the earlier chat. Prices and 52w h
 | **VRT** | Down about 28% in July after beating on profit but missing on sales (timing). Later a 6.9% drop on the AI selloff and a price-target cut (to $323 from $337). Jefferies cut to Hold earlier on valuation and margins. | Valuation + sector |
 | **GLW** | Fell about 10% after April earnings (Q2 guide below estimates, solar-wafer shutdown, $30M extra expense). Fell up to 20% on 28 Jul even after an earnings beat (valuation or weak forecast, sources conflict). Fell 13% on 14 Sep, **cause not found**. It had risen roughly 250% in a year first. | Company guidance + valuation |
 | **CRDO** | 13% one-day drop on 18 Aug in a chip selloff (nothing broke at the company). Fell 9% after a beat on 1 Sep. April drop tied to the $750M DustPhotonics deal. 7% drop on 12 Oct, **no cause found**. | Sector + deal + valuation |
-| **KLAC** | Sector-wide chip-equipment unwind after one of the best chip rallies on record. Very high valuation (about 39x forward P/E). Stock split in June. **No explanation found after late Sep.** | Sector + valuation |
+| **KLAC** | Sector-wide chip-equipment unwind after one of the best chip rallies on record. Very high valuation (about 39x forward P/E). Stock split in June. Fell 9.5% on 22 Oct after Lam Research warned of supply limits. See section F. | Sector + valuation |
 | **NOK** | Profit-taking after an AI-driven run to a near two-decade high (about June). Cautious 2026 outlook, restructuring costs, analyst downgrades, weak mobile unit. | Company outlook + valuation |
 | **CRWV** | Debt. Bond yields near 15%, unsecured 2032 notes reported at 78 cents on the dollar, debt of about $35B vs equity value of about $33.6B, convertible issuance and dilution. Fell 15.5% on 14 Oct. Nvidia's CEO defended it the next day. | **Company-specific: debt and financing** |
 | **MU, MRVL, AMD, ARM** | Profit-taking after huge runs (MU was up more than 200% for the year at one point). ARM also has a SoftBank loan tied to its share price. | Sentiment, positioning |
-| **EME, PWR** | **No sources found for either.** Cause unknown. | Unknown |
+| **EME, PWR** | Fell about 21% and 24% from 6 to 23 Oct, then jumped on 3 Nov, then fell 10% and 13% on 4 Nov. See section F. | Sector + politics + valuation |
 | **LEU, ACHR, GRAB, others** | Not searched in this round. | Unknown |
 
 ## D. What I did not check (so scores are partial)
@@ -94,3 +94,40 @@ These had only a traffic-light checklist from the earlier chat. Prices and 52w h
 - SK Hynix "₩148,160" was the US ADR price in dollars.
 - HLNE fee-related earnings: +18% for the quarter.
 - NVDA is now Watch, not "Quality Watch": its one-year price change is flat vs the market +14%.
+
+
+## F. Why EME, PWR and KLAC fell (searched 4 Nov; price dates from IBKR daily bars)
+
+**How sure I am: medium for the dates and moves (IBKR price bars plus company results), low-to-medium for the causes (news and aggregator articles; I link each move to a same-day event but cannot prove cause).**
+
+### EME (EMCOR) and PWR (Quanta): one story, two phases
+
+| Date | EME | PWR | What happened (per sources) |
+|---|---|---|---|
+| 6 Oct | peak close $824.52 | peak close $719.56 | AI-industrial stocks had run hard. Six data-centre names, including EMCOR, later lost about $94B in market value from 6 Oct (one report) |
+| 6 to 23 Oct | -21% to $647.66 | -24% to $546.43 | Valuation worries (an analyst cut EME's target from $885 to $690; Jefferies cut PWR's target on valuation), AI-infrastructure sell-off on rates and financing fears, and **political risk**: a Reuters piece (22 Oct) said public opposition to data centres could jolt the AI trade ahead of the 3 Nov midterms. Local opposition blocked or delayed more than 75 projects worth about $130B in Q1 2026 (same sources) |
+| 29 to 30 Oct | -1.4% on the day after results | about -2% (sources conflict) | **Results were strong, not weak.** EME: adjusted EPS $9.60 vs $8.35 expected, revenue $5.54B vs $5.19B, guidance raised to $34.50 to $35.50 (GAAP EPS $9.04 after a $34M impairment). PWR: adjusted EPS $6.06 vs $5.03 expected, revenue $12.01B vs $7.63B a year ago, guidance raised. The stocks did not rally on it |
+| 3 Nov | +3.6% | +5.8% | Rebound. A market recap credits a Bernstein note calling data-centre election fears overblown |
+| **4 Nov (today)** | **-10%** ($707 to $635) | **-13%** ($657 to $570) | **Democrats won Congress.** Reuters-based reports say AI data-centre stocks fell and renewables rose: GE Vernova -5.8%, Constellation -5%, Vistra -9%, CoreWeave -3.8%. An analyst (Dan Ives) called it a headwind for the AI build-out; others doubt legislation could really stop construction. **I found no article naming EME or PWR on 4 Nov**, so linking their drop to the election result is my inference from the same-day timing |
+
+**Plain answer:** nothing is wrong with their earnings. The stocks fell because the market priced in a political and financing risk to the data-centre build-out, on top of high valuations. Whether the risk is real is not known. These two are the cleanest "price fell, business did not" cases in the list, but that is also exactly what a falling-knife looks like, so CANSLIM says wait.
+
+**Not checked:** their order backlogs and customer mix (how much of each is data-centre work), any company statement on 4 Nov, and today's close (prices here are IBKR intraday).
+
+### KLAC (KLA)
+
+| Date | Move | What happened (per sources) |
+|---|---|---|
+| Before 7 Aug (outside my 3-month window) | high of $307 to about $198 | Part of the 51% drop happened here. Earlier searches show a large one-day fall around the 28 Jul results and a chip-rally unwind. Not verified in detail |
+| About 6 Oct | close about $207 (peak of the window) | Chip-equipment names were also weak earlier in October (Applied Materials fell after a 13 Oct investor day with no spending forecast, down 24% since) |
+| **22 Oct** | **-9.5%** ($163.43 to $147.83) | **Lam Research said supply-chain constraints (parts, cleanroom space) capped its outlook.** Lam fell about 9%, Applied Materials about 6%, the whole chip index about 6.7% (roughly $200B lost, one outlet). KLA was dragged down with no KLA-specific bad news found |
+| 23 Oct | low close $145.61 | -30% from the early-October peak |
+| 28 to 29 Oct | +5.5% on 29 Oct | **KLA's own results were fine.** EPS $1.22 vs $1.18 expected, revenue $4.14B (up from $3.21B), December-quarter revenue guide $4.5 to 4.9B vs $4.54B consensus (in line), gross-margin guide midpoint slightly lower. Stock bounced, then gave it back |
+| 30 Oct, 3 Nov, 4 Nov | -5.7%, then +2%, then -3.4% | Choppy. Valuation is high (about 39x trailing earnings per one source) |
+
+**Plain answer:** KLA fell because the whole chip-equipment group sold off after Lam's supply warning and after a huge run, not because of its own results. Valuation leaves little room for error. A China export-control hit of $300 to 350M was in an older outlook (company framing, not new).
+
+**Not checked:** the exact date of the $307 high and what drove July's drop, KLA's own supply exposure, and order trends.
+
+### What this changes in the labels
+Nothing. All three stay **Speculative Watch**. The new information is a reason the price fell, not a sign the price has stopped falling. EME and PWR are exposed to the data-centre political story; KLAC to the chip-equipment cycle and supply limits.
